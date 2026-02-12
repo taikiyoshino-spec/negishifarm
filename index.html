@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="青森県の根岸観光農園。ブルーベリー狩り・直売・観光農園情報">
+  <title>根岸観光農園｜青森県のブルーベリー農園</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Shippori+Mincho:wght@500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header class="header">
+    <div class="header-inner">
+      <h1 class="logo">根岸観光農園</h1>
+      <p class="tagline">青森のブルーベリー農園</p>
+      <button class="nav-toggle" id="navToggle" aria-label="メニューを開く">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+    <nav class="nav" id="nav">
+      <ul class="nav-list">
+        <li><a href="#products">商品一覧</a></li>
+        <li><a href="#contact">連絡先</a></li>
+        <li><a href="#access">アクセス</a></li>
+        <li><a href="#news">新着情報</a></li>
+        <li><a href="#gallery">ギャラリー</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-inner">
+        <h2 class="hero-title">青森の自然で<br>ブルーベリーを</h2>
+        <p class="hero-text">根岸観光農園へようこそ</p>
+      </div>
+    </section>
+
+    <section id="products" class="section products">
+      <div class="container">
+        <h2 class="section-title">商品一覧</h2>
+        <ul class="product-list">
+          <li class="product-card">
+            <div class="product-image" style="background: linear-gradient(135deg, #4a7c59 0%, #2d5a3d 100%);"></div>
+            <h3>生ブルーベリー</h3>
+            <p>摘みたての新鮮なブルーベリー。直売・予約受付中。</p>
+          </li>
+          <li class="product-card">
+            <div class="product-image" style="background: linear-gradient(135deg, #6b8e9e 0%, #4a6b7a 100%);"></div>
+            <h3>ジャム・加工品</h3>
+            <p>農園で手作りしたジャムや加工品をご用意しています。</p>
+          </li>
+          <li class="product-card">
+            <div class="product-image" style="background: linear-gradient(135deg, #8b7355 0%, #5c4a3a 100%);"></div>
+            <h3>ブルーベリー狩り</h3>
+            <p>季節のブルーベリー狩り体験（要予約・時期により変動）。</p>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="contact" class="section contact">
+      <div class="container">
+        <h2 class="section-title">連絡先</h2>
+        <div class="contact-card">
+          <dl class="contact-list">
+            <dt>お問い合わせ</dt>
+            <dd class="contact-name">根岸 〇〇（ねぎし 〇〇）</dd>
+            <dt>電話番号</dt>
+            <dd><a href="tel:000-0000-0000">000-0000-0000</a></dd>
+            <dt>メール</dt>
+            <dd><a href="mailto:info@example.com">info@example.com</a></dd>
+          </dl>
+          <p class="contact-note">※営業時間・予約はお電話またはメールでお問い合わせください。</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="access" class="section access">
+      <div class="container">
+        <h2 class="section-title">アクセス</h2>
+        <p class="access-text">青森県八戸市付近。下記地図またはGoogleマップで「根岸観光農園」で検索してください。</p>
+        <div class="map-wrap">
+          <a href="https://www.google.co.jp/maps/@40.392525,141.4846402,17z?hl=ja" target="_blank" rel="noopener noreferrer" class="map-link">
+            <div class="map-placeholder">
+              <span class="map-label">Googleマップで開く</span>
+              <span class="map-coords">〒031-xxxx 青森県八戸市付近</span>
+            </div>
+          </a>
+          <iframe
+            class="map-iframe"
+            src="https://www.google.com/maps?q=40.392525,141.4846402&hl=ja&z=17&output=embed"
+            allowfullscreen=""
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            title="根岸観光農園の位置">
+          </iframe>
+        </div>
+      </div>
+    </section>
+
+    <section id="news" class="section news">
+      <div class="container">
+        <h2 class="section-title">新着情報</h2>
+        <p class="news-intro">公式ツイッター（X）で農園の様子や営業情報をお知らせしています。</p>
+        <div class="twitter-wrap">
+          <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" class="twitter-link" id="twitterLink">
+            公式X（ツイッター）を見る
+          </a>
+          <div class="twitter-embed" id="twitterEmbed">
+            <p class="twitter-placeholder">X（Twitter）のタイムラインは、公式アカウントのURLを設定すると表示できます。</p>
+            <p class="twitter-hint">index.html の twitterEmbed 用に、X の埋め込みコードを貼り付けてください。</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="gallery" class="section gallery">
+      <div class="container">
+        <h2 class="section-title">ギャラリー</h2>
+        <div class="gallery-grid" id="galleryGrid">
+          <div class="gallery-item" data-index="0">
+            <div class="gallery-thumb" style="background: linear-gradient(135deg, #5a8f6a 0%, #3d6b4a 100%);"></div>
+            <p class="gallery-caption">農園の風景</p>
+          </div>
+          <div class="gallery-item" data-index="1">
+            <div class="gallery-thumb" style="background: linear-gradient(135deg, #4a6b9e 0%, #2d4a6e 100%);"></div>
+            <p class="gallery-caption">ブルーベリー</p>
+          </div>
+          <div class="gallery-item" data-index="2">
+            <div class="gallery-thumb" style="background: linear-gradient(135deg, #7a9e6a 0%, #5a7a4a 100%);"></div>
+            <p class="gallery-caption">収穫の様子</p>
+          </div>
+          <div class="gallery-item" data-index="3">
+            <div class="gallery-thumb" style="background: linear-gradient(135deg, #8b7355 0%, #6b5a45 100%);"></div>
+            <p class="gallery-caption">直売所</p>
+          </div>
+          <div class="gallery-item" data-index="4">
+            <div class="gallery-thumb" style="background: linear-gradient(135deg, #6a7a8e 0%, #4a5a6e 100%);"></div>
+            <p class="gallery-caption">季節の景色</p>
+          </div>
+          <div class="gallery-item" data-index="5">
+            <div class="gallery-thumb" style="background: linear-gradient(135deg, #5a6a7a 0%, #3d4a5a 100%);"></div>
+            <p class="gallery-caption">加工品</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div class="lightbox" id="lightbox" aria-hidden="true">
+    <button class="lightbox-close" id="lightboxClose" aria-label="閉じる">×</button>
+    <div class="lightbox-content">
+      <div class="lightbox-image" id="lightboxImage"></div>
+      <p class="lightbox-caption" id="lightboxCaption"></p>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <div class="container">
+      <p class="footer-logo">根岸観光農園</p>
+      <p class="footer-address">青森県</p>
+      <p class="footer-copy">&copy; 根岸観光農園</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
