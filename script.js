@@ -47,6 +47,54 @@
     });
   });
 
+  // ----- 商品モーダル -----
+  var productModal = document.getElementById('productModal');
+  var productModalClose = document.getElementById('productModalClose');
+  var productModalContent = document.getElementById('productModalContent');
+  var productCards = document.querySelectorAll('[data-product-modal]');
+
+  if (productModal && productModalContent && productModalClose) {
+    function openProductModal(card) {
+      var template = card.querySelector('.product-detail');
+      if (template && template.content) {
+        productModalContent.innerHTML = '';
+        productModalContent.appendChild(template.content.cloneNode(true));
+        productModal.setAttribute('aria-hidden', 'false');
+        productModal.classList.add('is-open');
+        document.body.style.overflow = 'hidden';
+      }
+    }
+
+    function closeProductModal() {
+      productModal.classList.remove('is-open');
+      productModal.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+    }
+
+    productCards.forEach(function (card) {
+      card.addEventListener('click', function () {
+        openProductModal(card);
+      });
+    });
+
+    productModalClose.addEventListener('click', closeProductModal);
+
+    productModal.querySelector('.product-modal-backdrop').addEventListener('click', closeProductModal);
+
+    productModalContent.addEventListener('click', function (e) {
+      var link = e.target.closest('a[href^="#"]');
+      if (link && link.getAttribute('href') !== '#') {
+        closeProductModal();
+      }
+    });
+
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && productModal.classList.contains('is-open')) {
+        closeProductModal();
+      }
+    });
+  }
+
   // ----- ギャラリーライトボックス -----
   if (galleryGrid && lightbox && lightboxClose && lightboxImage && lightboxCaption) {
     var items = galleryGrid.querySelectorAll('.gallery-item');

@@ -62,21 +62,63 @@
       <div class="container">
         <h2 class="section-title">商品一覧</h2>
         <ul class="product-list">
-          <li class="product-card">
+          <li class="product-card" data-product-modal>
             <div class="product-image"><img src="image/blueberry-cimg02.jpg" alt="摘みたての新鮮なブルーベリー"></div>
             <h3>特選生ブルーベリー</h3>
             <p class="product-shipping">送料無料！（沖縄県・一部離島を除く）</p>
             <p>摘みたての新鮮なブルーベリー。直売・予約受付中。</p>
+            <template class="product-detail">
+              <div class="product-modal-image"><img src="image/blueberry-cimg02.jpg" alt="特選生ブルーベリー"></div>
+              <h3>特選生ブルーベリー</h3>
+              <p class="product-modal-badge">送料無料！（沖縄県・一部離島を除く）</p>
+              <div class="product-modal-body">
+                <p>摘みたての新鮮なブルーベリーを直売・予約にてお届けしています。完全無農薬の自然農法で栽培した、お子様にも安心の品質です。</p>
+                <h4>ご注文・お問い合わせ</h4>
+                <p>お電話またはメールにてご予約・お問い合わせください。収穫時期により在庫が変動します。</p>
+                <p><a href="#contact">連絡先はこちら</a></p>
+              </div>
+            </template>
           </li>
-          <li class="product-card">
+          <li class="product-card" data-product-modal>
             <div class="product-image" style="background: linear-gradient(135deg, #6b8e9e 0%, #4a6b7a 100%);"></div>
             <h3>ジャム・加工品</h3>
             <p>農園で手作りしたジャムや加工品をご用意しています。</p>
+            <template class="product-detail">
+              <div class="product-modal-image" style="background: linear-gradient(135deg, #6b8e9e 0%, #4a6b7a 100%);"></div>
+              <h3>ジャム・加工品</h3>
+              <div class="product-modal-body">
+                <p>農園で収穫したブルーベリーを使用し、手作りでジャムや加工品を作っています。添加物を抑えた、素材の味を大切にした商品です。</p>
+                <h4>取り扱い品目（例）</h4>
+                <ul>
+                  <li>ブルーベリージャム</li>
+                  <li>その他加工品（時期により変動）</li>
+                </ul>
+                <h4>ご購入・お問い合わせ</h4>
+                <p>直売・予約にて承ります。お電話またはメールでお問い合わせください。</p>
+                <p><a href="#contact">連絡先はこちら</a></p>
+              </div>
+            </template>
           </li>
-          <li class="product-card">
+          <li class="product-card" data-product-modal>
             <div class="product-image"><img src="image/blueberry-cimg01.jpg" alt="ブルーベリー狩りの様子"></div>
             <h3>ブルーベリー狩り</h3>
             <p>季節のブルーベリー狩り体験（要予約・時期により変動）。</p>
+            <template class="product-detail">
+              <div class="product-modal-image"><img src="image/blueberry-cimg01.jpg" alt="ブルーベリー狩りの様子"></div>
+              <h3>ブルーベリー狩り</h3>
+              <div class="product-modal-body">
+                <p>青森の自然の中で、摘みたてのブルーベリーを楽しめる体験です。お子様連れでも安心の完全無農薬農園です。</p>
+                <h4>体験のポイント</h4>
+                <ul>
+                  <li>完全無農薬のブルーベリーをその場で味わえます</li>
+                  <li>収穫時期：7月〜8月頃（年により変動）</li>
+                  <li>要予約・時期により営業日が異なります</li>
+                </ul>
+                <h4>ご予約</h4>
+                <p>お電話またはメールにて事前予約をお願いします。収穫状況により受付を終了する場合があります。</p>
+                <p><a href="#contact">連絡先はこちら</a></p>
+              </div>
+            </template>
           </li>
         </ul>
       </div>
@@ -197,6 +239,16 @@
     <div class="lightbox-content">
       <div class="lightbox-image" id="lightboxImage"></div>
       <p class="lightbox-caption" id="lightboxCaption"></p>
+    </div>
+  </div>
+
+  <div class="product-modal" id="productModal" aria-hidden="true">
+    <div class="product-modal-backdrop"></div>
+    <div class="product-modal-inner">
+      <button class="product-modal-close" id="productModalClose" aria-label="閉じる">×</button>
+      <div class="product-modal-content" id="productModalContent">
+        <!-- 商品詳細がここに挿入されます -->
+      </div>
     </div>
   </div>
 
