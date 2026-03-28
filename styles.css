@@ -140,7 +140,7 @@ a:hover {
 }
 
 .nav.is-open {
-  max-height: 320px;
+  max-height: 480px;
 }
 
 .nav-list {
@@ -206,6 +206,17 @@ a:hover {
   color: var(--color-text-muted);
 }
 
+.hero-sub {
+  margin: 16px 0 0;
+  max-width: 22em;
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: var(--color-text);
+  opacity: 0.92;
+}
+
 /* ----- セクション共通 ----- */
 .section {
   padding: 48px 0;
@@ -232,6 +243,343 @@ a:hover {
   height: 3px;
   background: var(--color-primary-light);
   border-radius: 2px;
+}
+
+/* ----- 要点一覧（SEO / AI 参照用） ----- */
+.site-facts {
+  background: linear-gradient(180deg, #fff 0%, #f3f7f3 100%);
+  scroll-margin-top: calc(var(--header-height) + 12px);
+}
+
+.fact-sheet {
+  margin: 0;
+  max-width: 720px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.fact-sheet-row {
+  margin: 0 0 20px;
+  padding: 18px 18px 20px;
+  background: var(--color-bg-card);
+  border-radius: var(--radius);
+  border: 1px solid var(--color-border);
+  box-shadow: var(--shadow);
+}
+
+.fact-sheet-row:last-child {
+  margin-bottom: 0;
+}
+
+.fact-sheet dt {
+  margin: 0 0 10px;
+  font-family: var(--font-heading);
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--color-primary);
+  line-height: 1.4;
+}
+
+.fact-sheet dd {
+  margin: 0;
+  font-size: 0.95rem;
+  line-height: 1.8;
+  color: var(--color-text);
+}
+
+.fact-sheet dd strong {
+  color: var(--color-text);
+}
+
+.topic-subtitle {
+  margin: 20px 0 10px;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--color-text);
+  line-height: 1.45;
+  padding-left: 12px;
+  border-left: 3px solid var(--color-primary-light);
+}
+
+.topic-card .topic-subtitle:first-of-type {
+  margin-top: 8px;
+}
+
+.topic-list {
+  margin: 0 0 12px;
+  padding-left: 1.25em;
+  font-size: 0.95rem;
+  line-height: 1.75;
+  color: var(--color-text);
+}
+
+.topic-list li {
+  margin-bottom: 8px;
+}
+
+.topic-list li:last-child {
+  margin-bottom: 0;
+}
+
+@media (min-width: 600px) {
+  .fact-sheet-row {
+    padding: 22px 24px 24px;
+    margin-bottom: 24px;
+  }
+
+  .fact-sheet dt {
+    font-size: 1.1rem;
+  }
+}
+
+/* ----- 目的別ゲート ----- */
+.audience-gate {
+  padding: 40px 0 48px;
+  background: var(--color-bg-card);
+  border-top: 1px solid var(--color-border);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.audience-gate-heading {
+  margin: 0 0 12px;
+  font-family: var(--font-heading);
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--color-primary);
+  text-align: center;
+}
+
+.audience-gate-intro {
+  margin: 0 0 24px;
+  font-size: 0.95rem;
+  color: var(--color-text-muted);
+  text-align: center;
+  line-height: 1.7;
+}
+
+.audience-gate-grid {
+  display: grid;
+  gap: 16px;
+}
+
+.audience-gate-card {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 22px 20px;
+  background: var(--color-bg);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  border: 2px solid var(--color-border);
+  text-decoration: none;
+  color: var(--color-text);
+  transition: border-color 0.2s, box-shadow 0.2s, transform 0.15s;
+}
+
+.audience-gate-card:hover {
+  border-color: var(--color-primary-light);
+  box-shadow: 0 4px 16px rgba(45, 90, 61, 0.12);
+  text-decoration: none;
+}
+
+.audience-gate-card:active {
+  transform: scale(0.99);
+}
+
+.audience-gate-label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: var(--color-primary);
+  text-transform: uppercase;
+}
+
+.audience-gate-title {
+  font-family: var(--font-heading);
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--color-text);
+  line-height: 1.45;
+}
+
+.audience-gate-desc {
+  font-size: 0.88rem;
+  color: var(--color-text-muted);
+  line-height: 1.55;
+}
+
+/* ----- 目的別セクション（来園・購入・贈答） ----- */
+.audience-section {
+  scroll-margin-top: calc(var(--header-height) + 12px);
+}
+
+.audience-visit {
+  background: linear-gradient(180deg, #f5f9f5 0%, var(--color-bg) 100%);
+}
+
+.audience-shop {
+  background: var(--color-bg);
+}
+
+.audience-gift {
+  background: linear-gradient(180deg, #f7f4ef 0%, #faf8f4 100%);
+}
+
+.audience-lead {
+  margin: -8px 0 20px;
+  font-size: 0.95rem;
+  color: var(--color-text-muted);
+  line-height: 1.75;
+  text-align: center;
+}
+
+.audience-nav {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  margin: 0 0 28px;
+  padding: 0;
+}
+
+.audience-nav a {
+  display: inline-block;
+  padding: 8px 14px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--color-primary);
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  border-radius: 999px;
+  text-decoration: none;
+  transition: background 0.2s, border-color 0.2s;
+}
+
+.audience-nav a:hover {
+  background: #e8f0e8;
+  border-color: var(--color-primary-light);
+  text-decoration: none;
+}
+
+.topic-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.topic-card {
+  background: var(--color-bg-card);
+  border-radius: var(--radius);
+  padding: 22px 20px 24px;
+  box-shadow: var(--shadow);
+  border: 1px solid var(--color-border);
+  scroll-margin-top: calc(var(--header-height) + 16px);
+}
+
+.topic-title {
+  margin: 0 0 12px;
+  font-family: var(--font-heading);
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--color-primary);
+  line-height: 1.4;
+}
+
+.topic-text {
+  margin: 0 0 12px;
+  font-size: 0.95rem;
+  line-height: 1.75;
+  color: var(--color-text);
+}
+
+.topic-text:last-child {
+  margin-bottom: 0;
+}
+
+.topic-note {
+  margin: 12px 0 0;
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+  line-height: 1.65;
+}
+
+.topic-embed {
+  margin-top: 16px;
+}
+
+.topic-card .calendar-note {
+  margin-top: 12px;
+}
+
+.topic-card .topic-access-text {
+  text-align: left;
+}
+
+.topic-card .map-wrap {
+  margin-top: 12px;
+}
+
+.faq-list {
+  margin: 0;
+}
+
+.faq-item {
+  margin: 0 0 16px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.faq-item:last-child {
+  margin-bottom: 0;
+  padding-bottom: 0;
+  border-bottom: none;
+}
+
+.faq-item dt {
+  margin: 0 0 8px;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--color-text);
+}
+
+.faq-item dd {
+  margin: 0;
+  font-size: 0.9rem;
+  line-height: 1.7;
+  color: var(--color-text-muted);
+}
+
+.product-list--single {
+  max-width: 360px;
+  margin: 16px auto 0;
+}
+
+.product-list--inline {
+  margin-top: 16px;
+}
+
+@media (min-width: 600px) {
+  .audience-gate-heading {
+    font-size: 1.5rem;
+  }
+
+  .audience-gate-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+
+  .audience-gate-card {
+    padding: 26px 22px;
+    min-height: 168px;
+  }
+
+  .topic-card {
+    padding: 28px 28px 32px;
+  }
+
+  .topic-stack {
+    gap: 24px;
+  }
 }
 
 /* ----- 商品一覧 ----- */
@@ -895,6 +1243,20 @@ a:hover {
   .product-list {
     grid-template-columns: repeat(3, 1fr);
     gap: 24px;
+  }
+
+  .product-list--single,
+  .product-list--inline {
+    grid-template-columns: 1fr;
+    max-width: 420px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .product-list--inline {
+    max-width: none;
+    margin-left: 0;
+    margin-right: 0;
   }
 
   .product-image {

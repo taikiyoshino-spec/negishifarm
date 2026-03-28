@@ -3,8 +3,27 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="青森県の根岸FARM。ブルーベリー狩り・直売・観光農園情報">
+  <meta name="description" content="根岸FARM（青森県八戸市付近）。営業期間・時間・料金・予約・アクセス・駐車場・お子様連れ、直売・発送の有無までページ内で整理。完全無農薬のブルーベリー狩り・生果・ジャム。">
   <title>根岸FARM｜青森県のブルーベリー農園</title>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "name": "根岸FARM",
+    "description": "青森県の完全無農薬ブルーベリー農園。ブルーベリー狩り、直売（生果・ジャム等）、予約・発送は商品・時期により異なります。詳細は公式サイトの要点一覧および各セクションをご確認ください。",
+    "address": {
+      "@type": "PostalAddress",
+      "addressCountry": "JP",
+      "addressRegion": "青森県",
+      "addressLocality": "八戸市",
+      "streetAddress": "（番地・建物名を追記してください）",
+      "postalCode": "031-xxxx"
+    },
+    "telephone": "+81-00-0000-0000",
+    "priceRange": "¥¥",
+    "knowsAbout": ["ブルーベリー狩り", "ブルーベリー直売", "無農薬栽培", "観光農園"]
+  }
+  </script>
   <link rel="stylesheet" href="styles.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -21,11 +40,11 @@
     </div>
     <nav class="nav" id="nav">
       <ul class="nav-list">
-        <li><a href="#products">商品一覧</a></li>
-        <li><a href="#contact">連絡先</a></li>
-        <li><a href="#access">アクセス</a></li>
+        <li><a href="#visit">来園したい</a></li>
+        <li><a href="#shop">買いたい</a></li>
+        <li><a href="#gift">贈りたい</a></li>
         <li><a href="#news">新着情報</a></li>
-        <li><a href="#calendar">予定</a></li>
+        <li><a href="#contact">連絡先</a></li>
         <li><a href="#gallery">ギャラリー</a></li>
       </ul>
     </nav>
@@ -36,6 +55,7 @@
       <div class="hero-inner">
         <h2 class="hero-title">青森の自然で<br>ブルーベリーを</h2>
         <p class="hero-text">根岸FARMへようこそ</p>
+        <p class="hero-sub">知りたいことを、目的のままにすばやく見つけられます。</p>
       </div>
     </section>
 
@@ -58,69 +78,294 @@
       </div>
     </section>
 
-    <section id="products" class="section products">
+    <section class="audience-gate" aria-labelledby="audience-gate-title">
       <div class="container">
-        <h2 class="section-title">商品一覧</h2>
-        <ul class="product-list">
-          <li class="product-card" data-product-modal>
-            <div class="product-image"><img src="image/blueberry-cimg02.jpg" alt="摘みたての新鮮なブルーベリー"></div>
-            <h3>特選生ブルーベリー</h3>
-            <p class="product-shipping">送料無料！（沖縄県・一部離島を除く）</p>
-            <p>摘みたての新鮮なブルーベリー。直売・予約受付中。</p>
-            <template class="product-detail">
-              <div class="product-modal-image"><img src="image/blueberry-cimg02.jpg" alt="特選生ブルーベリー"></div>
-              <h3>特選生ブルーベリー</h3>
-              <p class="product-modal-badge">送料無料！（沖縄県・一部離島を除く）</p>
-              <div class="product-modal-body">
-                <p>摘みたての新鮮なブルーベリーを直売・予約にてお届けしています。完全無農薬の自然農法で栽培した、お子様にも安心の品質です。</p>
-                <h4>ご注文・お問い合わせ</h4>
-                <p>お電話またはメールにてご予約・お問い合わせください。収穫時期により在庫が変動します。</p>
-                <p><a href="#contact">連絡先はこちら</a></p>
+        <h2 id="audience-gate-title" class="audience-gate-heading">あなたに合う情報を選ぶ</h2>
+        <p class="audience-gate-intro">農園に来る・お買い求め・贈り物。目的によって見る場所が分かれています。<a href="#site-facts">営業期間・予約・駐車場などの要点一覧</a>もご利用ください。</p>
+        <div class="audience-gate-grid">
+          <a class="audience-gate-card" href="#visit">
+            <span class="audience-gate-label">来園したい方へ</span>
+            <span class="audience-gate-title">開園・料金・予約・アクセス</span>
+            <span class="audience-gate-desc">今年の営業や駐車場、品種、よくある質問など</span>
+          </a>
+          <a class="audience-gate-card" href="#shop">
+            <span class="audience-gate-label">買いたい方へ</span>
+            <span class="audience-gate-title">生果・ジャム・価格・発送</span>
+            <span class="audience-gate-desc">販売時期・売り切れの見方など</span>
+          </a>
+          <a class="audience-gate-card" href="#gift">
+            <span class="audience-gate-label">贈りたい方へ</span>
+            <span class="audience-gate-title">ギフト・箱・送料・注文</span>
+            <span class="audience-gate-desc">贈答用の組み合わせと発送の流れ</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== 来園したい人向け ========== -->
+    <section id="visit" class="section audience-section audience-visit">
+      <div class="container">
+        <h2 class="section-title">来園したい方へ</h2>
+        <p class="audience-lead">ブルーベリー狩りや直売所でのお買い物、農園見学など、来園に必要な情報をまとめました。</p>
+        <nav class="audience-nav" aria-label="来園情報の目次">
+          <a href="#visit-open">今年の開園情報</a>
+          <a href="#visit-hours">営業時間</a>
+          <a href="#visit-fee">料金</a>
+          <a href="#visit-reserve">予約方法</a>
+          <a href="#visit-picking">ブルーベリー狩り</a>
+          <a href="#access">アクセス</a>
+          <a href="#visit-parking">駐車場</a>
+          <a href="#visit-varieties">品種紹介</a>
+          <a href="#visit-faq">よくある質問</a>
+        </nav>
+
+        <div class="topic-stack">
+          <article id="visit-open" class="topic-card">
+            <h3 class="topic-title">今年の開園情報</h3>
+            <p class="topic-text">最新の営業状況やお知らせは、下記カレンダーと公式X（ツイッター）でご確認ください。収穫状況により当日の受付が変わる場合があります。</p>
+            <div class="calendar-wrap topic-embed">
+              <iframe
+                class="calendar-iframe"
+                src="https://calendar.google.com/calendar/embed?src=japanese__ja%40holiday.calendar.google.com&ctz=Asia%2FTokyo&mode=MONTH&height=500&wkst=1&bgcolor=%23ffffff&showTitle=0&showNav=1&showDate=1&showPrint=0&showTabs=0&showCalendars=0&showTz=0"
+                style="border:0"
+                width="100%"
+                height="500"
+                frameborder="0"
+                scrolling="no"
+                title="根岸FARMの予定・開園カレンダー">
+              </iframe>
+            </div>
+            <p class="calendar-note">※現在はサンプル表示です。ご自身のカレンダーを表示するには、<a href="https://calendar.google.com" target="_blank" rel="noopener noreferrer">Googleカレンダー</a>の設定 → カレンダーの統合 → 埋め込みコードの<code>src</code>をコピーし、上記iframeに差し替えてください。カレンダーは「一般公開」に設定する必要があります。</p>
+            <p class="topic-text"><a href="#news">新着情報・公式Xはこちら</a></p>
+          </article>
+
+          <article id="visit-fee" class="topic-card">
+            <h3 class="topic-title">料金</h3>
+            <p class="topic-text">ブルーベリー狩り・持ち帰り量など、料金体系はシーズンやメニューにより変動することがあります。正確な金額はお電話・メール、または来園前に公式情報でご確認ください。</p>
+            <p class="topic-note">※ここに料金表や注意事項を掲載できます（準備ができ次第、追記してください）。</p>
+          </article>
+
+          <article id="visit-reserve" class="topic-card">
+            <h3 class="topic-title">予約の有無・予約方法</h3>
+            <p class="topic-text"><strong>予約の有無：</strong>ブルーベリー狩りなど体験型の来園では、混雑緩和・受入人数の都合により<strong>事前予約が必要</strong>となることがあります。直売のみのご利用で予約不要の場合もありますので、来園前に内容をご確認ください。</p>
+            <p class="topic-text"><strong>予約方法：</strong>お電話またはメールにて、希望日・人数・お連れ様の構成（お子様含む）をお知らせください。<a href="#contact">連絡先はこちら</a></p>
+          </article>
+
+          <article id="visit-picking" class="topic-card topic-card--product">
+            <h3 class="topic-title">ブルーベリー狩り</h3>
+            <p class="topic-text">体験の概要はカードをタップしてご覧ください。</p>
+            <ul class="product-list product-list--single">
+              <li class="product-card" data-product-modal>
+                <div class="product-image"><img src="image/blueberry-cimg01.jpg" alt="ブルーベリー狩りの様子"></div>
+                <h3>ブルーベリー狩り</h3>
+                <p>季節のブルーベリー狩り体験（要予約・時期により変動）。</p>
+                <template class="product-detail">
+                  <div class="product-modal-image"><img src="image/blueberry-cimg01.jpg" alt="ブルーベリー狩りの様子"></div>
+                  <h3>ブルーベリー狩り</h3>
+                  <div class="product-modal-body">
+                    <p>青森の自然の中で、摘みたてのブルーベリーを楽しめる体験です。お子様連れでも安心の完全無農薬農園です。</p>
+                    <h4>体験のポイント</h4>
+                    <ul>
+                      <li>完全無農薬のブルーベリーをその場で味わえます</li>
+                      <li>収穫時期：7月〜8月頃（年により変動）</li>
+                      <li>要予約・時期により営業日が異なります</li>
+                    </ul>
+                    <h4>ご予約</h4>
+                    <p>お電話またはメールにて事前予約をお願いします。収穫状況により受付を終了する場合があります。</p>
+                    <p><a href="#contact">連絡先はこちら</a></p>
+                  </div>
+                </template>
+              </li>
+            </ul>
+          </article>
+
+          <article id="access" class="topic-card">
+            <h3 class="topic-title">アクセス</h3>
+            <p class="access-text topic-access-text">青森県八戸市付近。下記地図またはGoogleマップで「根岸FARM」で検索してください。</p>
+            <div class="map-wrap">
+              <a href="https://www.google.co.jp/maps/@40.392525,141.4846402,17z?hl=ja" target="_blank" rel="noopener noreferrer" class="map-link">
+                <div class="map-placeholder">
+                  <span class="map-label">Googleマップで開く</span>
+                  <span class="map-coords">〒031-xxxx 青森県八戸市付近</span>
+                </div>
+              </a>
+              <iframe
+                class="map-iframe"
+                src="https://www.google.com/maps?q=40.392525,141.4846402&hl=ja&z=17&output=embed"
+                allowfullscreen=""
+                loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"
+                title="根岸FARMの位置">
+              </iframe>
+            </div>
+          </article>
+
+          <article id="visit-parking" class="topic-card">
+            <h3 class="topic-title">駐車場</h3>
+            <p class="topic-text">お車でお越しの場合の駐車場の場所・台数・大型車の可否など、来園前にご確認ください（テキスト・写真をここに追加できます）。</p>
+          </article>
+
+          <article id="visit-varieties" class="topic-card">
+            <h3 class="topic-title">品種紹介</h3>
+            <p class="topic-text">農園で栽培している品種の特徴・収穫時期の目安などを掲載するエリアです。品種名と味わいの説明を追記すると、来園前のイメージが湧きやすくなります。</p>
+          </article>
+
+          <article id="visit-faq" class="topic-card">
+            <h3 class="topic-title">よくある質問</h3>
+            <dl class="faq-list">
+              <div class="faq-item">
+                <dt>雨天でも開園しますか？</dt>
+                <dd>農園の方針により異なります。当日の判断は公式のお知らせまたはお問い合わせでご確認ください。</dd>
               </div>
-            </template>
-          </li>
-          <li class="product-card" data-product-modal>
-            <div class="product-image" style="background: linear-gradient(135deg, #6b8e9e 0%, #4a6b7a 100%);"></div>
-            <h3>ジャム・加工品</h3>
-            <p>農園で手作りしたジャムや加工品をご用意しています。</p>
-            <template class="product-detail">
-              <div class="product-modal-image" style="background: linear-gradient(135deg, #6b8e9e 0%, #4a6b7a 100%);"></div>
-              <h3>ジャム・加工品</h3>
-              <div class="product-modal-body">
-                <p>農園で収穫したブルーベリーを使用し、手作りでジャムや加工品を作っています。添加物を抑えた、素材の味を大切にした商品です。</p>
-                <h4>取り扱い品目（例）</h4>
-                <ul>
-                  <li>ブルーベリージャム</li>
-                  <li>その他加工品（時期により変動）</li>
-                </ul>
-                <h4>ご購入・お問い合わせ</h4>
-                <p>直売・予約にて承ります。お電話またはメールでお問い合わせください。</p>
-                <p><a href="#contact">連絡先はこちら</a></p>
+              <div class="faq-item">
+                <dt>ペット同伴は可能ですか？</dt>
+                <dd>ルールは施設により異なります。事前にお電話またはメールでご確認ください。</dd>
               </div>
-            </template>
-          </li>
-          <li class="product-card" data-product-modal>
-            <div class="product-image"><img src="image/blueberry-cimg01.jpg" alt="ブルーベリー狩りの様子"></div>
-            <h3>ブルーベリー狩り</h3>
-            <p>季節のブルーベリー狩り体験（要予約・時期により変動）。</p>
-            <template class="product-detail">
-              <div class="product-modal-image"><img src="image/blueberry-cimg01.jpg" alt="ブルーベリー狩りの様子"></div>
-              <h3>ブルーベリー狩り</h3>
-              <div class="product-modal-body">
-                <p>青森の自然の中で、摘みたてのブルーベリーを楽しめる体験です。お子様連れでも安心の完全無農薬農園です。</p>
-                <h4>体験のポイント</h4>
-                <ul>
-                  <li>完全無農薬のブルーベリーをその場で味わえます</li>
-                  <li>収穫時期：7月〜8月頃（年により変動）</li>
-                  <li>要予約・時期により営業日が異なります</li>
-                </ul>
-                <h4>ご予約</h4>
-                <p>お電話またはメールにて事前予約をお願いします。収穫状況により受付を終了する場合があります。</p>
-                <p><a href="#contact">連絡先はこちら</a></p>
+              <div class="faq-item">
+                <dt>履き物の注意はありますか？</dt>
+                <dd>田畑・不均一な路面がある場合があります。歩きやすい靴でのご来園をおすすめします。</dd>
               </div>
-            </template>
-          </li>
-        </ul>
+            </dl>
+            <p class="topic-note">※実際によくいただく質問に差し替えてください。</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== 買いたい人向け ========== -->
+    <section id="shop" class="section audience-section audience-shop">
+      <div class="container">
+        <h2 class="section-title">買いたい方へ</h2>
+        <p class="audience-lead">生のブルーベリーからジャム・加工品まで。お買い求めと発送に関する情報です。</p>
+        <nav class="audience-nav" aria-label="購入情報の目次">
+          <a href="#shop-current">今買える商品</a>
+          <a href="#shop-fresh">生のブルーベリー販売</a>
+          <a href="#shop-processed">ジャム・加工品</a>
+          <a href="#shop-price">いくらで買えるか</a>
+          <a href="#shop-ship">発送できるか</a>
+          <a href="#shop-season">販売時期</a>
+          <a href="#shop-stock">売り切れ状況</a>
+        </nav>
+
+        <div class="topic-stack">
+          <article id="shop-fresh" class="topic-card">
+            <h3 class="topic-title">生のブルーベリー販売</h3>
+            <p class="topic-text">摘みたての生果を直売・予約にてお届けしています。詳細はカードをタップしてご覧ください。</p>
+            <ul class="product-list product-list--inline">
+              <li class="product-card" data-product-modal>
+                <div class="product-image"><img src="image/blueberry-cimg02.jpg" alt="摘みたての新鮮なブルーベリー"></div>
+                <h3>特選生ブルーベリー</h3>
+                <p class="product-shipping">送料無料！（沖縄県・一部離島を除く）</p>
+                <p>摘みたての新鮮なブルーベリー。直売・予約受付中。</p>
+                <template class="product-detail">
+                  <div class="product-modal-image"><img src="image/blueberry-cimg02.jpg" alt="特選生ブルーベリー"></div>
+                  <h3>特選生ブルーベリー</h3>
+                  <p class="product-modal-badge">送料無料！（沖縄県・一部離島を除く）</p>
+                  <div class="product-modal-body">
+                    <p>摘みたての新鮮なブルーベリーを直売・予約にてお届けしています。完全無農薬の自然農法で栽培した、お子様にも安心の品質です。</p>
+                    <h4>ご注文・お問い合わせ</h4>
+                    <p>お電話またはメールにてご予約・お問い合わせください。収穫時期により在庫が変動します。</p>
+                    <p><a href="#contact">連絡先はこちら</a></p>
+                  </div>
+                </template>
+              </li>
+            </ul>
+          </article>
+
+          <article id="shop-processed" class="topic-card">
+            <h3 class="topic-title">ジャム・加工品</h3>
+            <p class="topic-text">農園で手作りしたジャムや加工品です。内容はカードをタップしてご覧ください。</p>
+            <ul class="product-list product-list--inline">
+              <li class="product-card" data-product-modal>
+                <div class="product-image" style="background: linear-gradient(135deg, #6b8e9e 0%, #4a6b7a 100%);"></div>
+                <h3>ジャム・加工品</h3>
+                <p>農園で手作りしたジャムや加工品をご用意しています。</p>
+                <template class="product-detail">
+                  <div class="product-modal-image" style="background: linear-gradient(135deg, #6b8e9e 0%, #4a6b7a 100%);"></div>
+                  <h3>ジャム・加工品</h3>
+                  <div class="product-modal-body">
+                    <p>農園で収穫したブルーベリーを使用し、手作りでジャムや加工品を作っています。添加物を抑えた、素材の味を大切にした商品です。</p>
+                    <h4>取り扱い品目（例）</h4>
+                    <ul>
+                      <li>ブルーベリージャム</li>
+                      <li>その他加工品（時期により変動）</li>
+                    </ul>
+                    <h4>ご購入・お問い合わせ</h4>
+                    <p>直売・予約にて承ります。お電話またはメールでお問い合わせください。</p>
+                    <p><a href="#contact">連絡先はこちら</a></p>
+                  </div>
+                </template>
+              </li>
+            </ul>
+          </article>
+
+          <article id="shop-price" class="topic-card">
+            <h3 class="topic-title">いくらで買えるか</h3>
+            <p class="topic-text">容量（g・パック数）ごとの価格、セット販売の有无などをここに整理すると、来店・通販のどちらでも迷いが減ります。</p>
+            <p class="topic-note">※価格表の掲載準備ができたら、このブロックを差し替えてください。</p>
+          </article>
+
+          <article id="shop-ship" class="topic-card">
+            <h3 class="topic-title">発送できるか</h3>
+            <p class="topic-text"><strong>発送の可否：</strong>商品によって異なります。生のブルーベリーは、クール便等での発送に対応している場合があります（沖縄・離島など例外あり）。ジャム等の加工品は常温・レターパック等の事例もあるため、品目ごとにご確認ください。</p>
+            <p class="topic-text">サイト上の「送料無料」等の表記は条件付きの一例です。<strong>お届け地域・日付・品温・箱数が確定した時点で、必ず<a href="#contact">お問い合わせ</a>にて可否と送料をご確認ください。</strong></p>
+          </article>
+
+          <article id="shop-season" class="topic-card">
+            <h3 class="topic-title">販売時期</h3>
+            <p class="topic-text">生果は収穫シーズンに合わせて販売期間が限られます。ジャム等の加工品は時期によって在庫が異なる場合があります。</p>
+          </article>
+
+          <article id="shop-stock" class="topic-card">
+            <h3 class="topic-title">売り切れ状況</h3>
+            <p class="topic-text">当日の在庫や受付終了は、公式X（ツイッター）やお電話での確認が確実です。ここに「本日のメモ」を追記する運用も可能です。</p>
+            <p class="topic-text"><a href="#news">新着情報はこちら</a></p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== 贈りたい人向け ========== -->
+    <section id="gift" class="section audience-section audience-gift">
+      <div class="container">
+        <h2 class="section-title">贈りたい方へ</h2>
+        <p class="audience-lead">贈答用の組み合わせ、箱、送料、注文の流れをひとまとめにしました。</p>
+        <nav class="audience-nav" aria-label="贈答情報の目次">
+          <a href="#gift-lineup">ギフト用の商品</a>
+          <a href="#gift-shipping">発送案内</a>
+          <a href="#gift-packaging">箱や見た目</a>
+          <a href="#gift-order">注文方法</a>
+          <a href="#gift-fee">送料</a>
+        </nav>
+
+        <div class="topic-stack">
+          <article id="gift-lineup" class="topic-card">
+            <h3 class="topic-title">ギフト用の商品</h3>
+            <p class="topic-text">生果の詰め合わせ、ジャムセット、メッセージカードの同封の可否など、贈答向けラインナップを記載するエリアです。</p>
+            <p class="topic-text"><a href="#shop-processed">生果・加工品の一覧は「買いたい方へ」</a>もご覧ください。</p>
+          </article>
+
+          <article id="gift-shipping" class="topic-card">
+            <h3 class="topic-title">発送案内</h3>
+            <p class="topic-text">冷蔵・常温の区分、お届けまでの目安日数、繁忙期の注意など、贈り物として送るときに必要な案内をここにまとめられます。</p>
+          </article>
+
+          <article id="gift-packaging" class="topic-card">
+            <h3 class="topic-title">箱や見た目</h3>
+            <p class="topic-text">ギフト箱のサイズ、のし・ラッピング対応、写真掲載用のスペースです。実物のイメージが伝わると選びやすくなります。</p>
+          </article>
+
+          <article id="gift-order" class="topic-card">
+            <h3 class="topic-title">注文方法</h3>
+            <p class="topic-text">電話・メール・フォームなど、贈答注文の受け方と必要事項（届け先・日時指定）を記載してください。</p>
+            <p class="topic-text"><a href="#contact">連絡先はこちら</a></p>
+          </article>
+
+          <article id="gift-fee" class="topic-card">
+            <h3 class="topic-title">送料</h3>
+            <p class="topic-text">地域別の送料、複数箱時の計算、沖縄・離島の扱いを表形式などで示すと、贈り先を決めたあとがスムーズです。</p>
+          </article>
+        </div>
       </div>
     </section>
 
@@ -141,29 +386,6 @@
       </div>
     </section>
 
-    <section id="access" class="section access">
-      <div class="container">
-        <h2 class="section-title">アクセス</h2>
-        <p class="access-text">青森県八戸市付近。下記地図またはGoogleマップで「根岸FARM」で検索してください。</p>
-        <div class="map-wrap">
-          <a href="https://www.google.co.jp/maps/@40.392525,141.4846402,17z?hl=ja" target="_blank" rel="noopener noreferrer" class="map-link">
-            <div class="map-placeholder">
-              <span class="map-label">Googleマップで開く</span>
-              <span class="map-coords">〒031-xxxx 青森県八戸市付近</span>
-            </div>
-          </a>
-          <iframe
-            class="map-iframe"
-            src="https://www.google.com/maps?q=40.392525,141.4846402&hl=ja&z=17&output=embed"
-            allowfullscreen=""
-            loading="lazy"
-            referrerpolicy="no-referrer-when-downgrade"
-            title="根岸FARMの位置">
-          </iframe>
-        </div>
-      </div>
-    </section>
-
     <section id="news" class="section news">
       <div class="container">
         <h2 class="section-title">新着情報</h2>
@@ -177,27 +399,6 @@
             <p class="twitter-hint">index.html の twitterEmbed 用に、X の埋め込みコードを貼り付けてください。</p>
           </div>
         </div>
-      </div>
-    </section>
-
-    <section id="calendar" class="section calendar">
-      <div class="container">
-        <h2 class="section-title">予定</h2>
-        <p class="calendar-intro">営業日・イベントなどの予定をご確認いただけます。</p>
-        <div class="calendar-wrap">
-          <!-- ご自身のカレンダーに差し替え: Googleカレンダー → 設定 → 対象のカレンダー → カレンダーの統合 → 埋め込みコードをコピーし、iframeのsrcを差し替え -->
-          <iframe
-            class="calendar-iframe"
-            src="https://calendar.google.com/calendar/embed?src=japanese__ja%40holiday.calendar.google.com&ctz=Asia%2FTokyo&mode=MONTH&height=500&wkst=1&bgcolor=%23ffffff&showTitle=0&showNav=1&showDate=1&showPrint=0&showTabs=0&showCalendars=0&showTz=0"
-            style="border:0"
-            width="100%"
-            height="500"
-            frameborder="0"
-            scrolling="no"
-            title="根岸FARMの予定">
-          </iframe>
-        </div>
-        <p class="calendar-note">※現在はサンプル表示です。ご自身のカレンダーを表示するには、<a href="https://calendar.google.com" target="_blank" rel="noopener noreferrer">Googleカレンダー</a>の設定 → カレンダーの統合 → 埋め込みコードの<code>src</code>をコピーし、上記iframeに差し替えてください。カレンダーは「一般公開」に設定する必要があります。</p>
       </div>
     </section>
 
