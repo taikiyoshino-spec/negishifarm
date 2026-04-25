@@ -156,4 +156,102 @@
       }
     });
   }
+
+  // ----- 本日の開園状況（NEGISHI_OPEN_CONFIG を農園の実情に合わせて編集） -----
+  var NEGISHI_OPEN_CONFIG = {
+    manual: null,
+    seasonFrom: { month: 7, day: 1 },
+    seasonTo: { month: 8, day: 31 },
+    dayOpen: '09:00',
+    dayClose: '17:00',
+    closedWeekdays: [],
+    extraClosedDates: []
+  };
+
+  function openStatusPad(n) {
+    return n < 10 ? '0' + n : String(n);
+  }
+  function openStatusDateKey(d) {
+    return d.getFullYear() + '-' + openStatusPad(d.getMonth() + 1) + '-' + openStatusPad(d.getDate());
+  }
+  function openStatusInSeason(d, cfg) {
+    var m = d.getMonth() + 1;
+    var day = d.getDate();
+    var x = m * 100 + day;
+    var f = cfg.seasonFrom.month * 100 + cfg.seasonFrom.day;
+    var t = cfg.seasonTo.month * 100 + cfg.seasonTo.day;
+    return x >= f && x <= t;
+  }
+  function openStatusParseTime(s) {
+    var p = s.split(':');
+    return parseInt(p[0], 10) * 60 + parseInt(p[1], 10);
+  }
+  function updateOpenStatus() {
+    var nowEl = document.getElementById('openStatusNow');
+    var badgeEl = document.getElementById('openStatusBadge');
+    var detailEl = document.getElementById('openStatusDetail');
+    if (!nowEl || !badgeEl) return;
+
+    var cfg = NEGISHI_OPEN_CONFIG;
+    var now = new Date();
+    var timeStr = now.toLocaleString('ja-JP', {
+      timeZone: 'Asia/Tokyo',
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+      weekday: 'short',
+      hour: '2-digit',
+      minute: '2-digit'
+    });
+    nowEl.textContent = '現在の目安（日本時間）：' + timeStr;
+
+    function setBadge(msg, className, detail) {
+      badgeEl.textContent = msg;
+      badgeEl.className = 'open-status-badge ' + className;
+      if (detailEl) detailEl.textContent = detail || '';
+    }
+
+    if (cfg.manual === 'open') {
+      return setBadge('ただいま開園中（手動表示）', 'is-open', '');
+    }
+    if (cfg.manual === 'closed') {
+      return setBadge('本日は休園（手動表示）', 'is-closed', '');
+    }
+
+    if (cfg.closedWeekdays.indexOf(now.getDay()) !== -1) {
+      return setBadge('本日は定休日（設定の目安）', 'is-closed', '定休日は NEGISHI_OPEN_CONFIG の closedWeekdays（0=日…6=土）で編集できます。');
+    }
+    if (cfg.extraClosedDates.indexOf(openStatusDateKey(now)) !== -1) {
+      return setBadge('本日は臨時休業（設定の目安）', 'is-closed', '');
+    }
+    if (!openStatusInSeason(now, cfg)) {
+      return setBadge('ブルーベリー狩りシーズン外（目安）', 'is-out', 'シーズン期間は NEGISHI_OPEN_CONFIG の seasonFrom / seasonTo で変更。直売のみの日は新着等でお知らせください。');
+    }
+
+    var mins = now.getHours() * 60 + now.getMinutes();
+    var o = openStatusParseTime(cfg.dayOpen);
+    var c = openStatusParseTime(cfg.dayClose);
+    if (mins < o) {
+      return setBadge('本日は開園予定（受付開始前）', 'is-pending', '受付は ' + cfg.dayOpen + ' から（設定どおり）の目安です。');
+    }
+    if (mins >= c) {
+      return setBadge('本日の受付は終了した時間帯です（目安）', 'is-closed', '最終目安 ' + cfg.dayClose + '。実際の案内を優先してください。');
+    }
+    return setBadge('ただいま開園中（受付時間内の目安）', 'is-open', cfg.dayOpen + ' 〜 ' + cfg.dayClose + ' の間で受付可能とみなしています。天候・在庫で変わる場合があります。');
+  }
+  updateOpenStatus();
+  setInterval(updateOpenStatus, 60000);
+
+  // ----- トップ動画: 再生エラー時（コーデック非対応・大容量障害・file:// 制限 など） -----
+  var topHeroVideo = document.getElementById('topHeroVideo');
+  var topVideoError = document.getElementById('topVideoError');
+  if (topHeroVideo && topVideoError) {
+    function showTopVideoError() {
+      topVideoError.hidden = false;
+    }
+    topHeroVideo.addEventListener('error', showTopVideoError);
+    if (topHeroVideo.error) {
+      showTopVideoError();
+    }
+  }
 })();
