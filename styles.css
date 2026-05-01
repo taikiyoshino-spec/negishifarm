@@ -29,6 +29,18 @@ html {
   scroll-behavior: smooth;
 }
 
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
 body {
   margin: 0;
   font-family: var(--font-body);
@@ -140,7 +152,7 @@ a:hover {
 }
 
 .nav.is-open {
-  max-height: 480px;
+  max-height: 560px;
 }
 
 .nav-list {
@@ -245,50 +257,229 @@ a:hover {
   border-radius: 2px;
 }
 
-/* ----- 要点一覧（SEO / AI 参照用） ----- */
-.site-facts {
-  background: linear-gradient(180deg, #fff 0%, #f3f7f3 100%);
+.section-title--left {
+  text-align: left;
+}
+
+.section-title--left::after {
+  left: 0;
+  transform: none;
+}
+
+/* ----- トップ動画（共通 .section を付けない。付けると 600px+ で padding が 64px になる） ----- */
+.top-video {
+  padding: 0 0 4px;
+  background: #1a1f1c;
   scroll-margin-top: calc(var(--header-height) + 12px);
 }
 
-.fact-sheet {
-  margin: 0;
-  max-width: 720px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.fact-sheet-row {
-  margin: 0 0 20px;
-  padding: 18px 18px 20px;
-  background: var(--color-bg-card);
-  border-radius: var(--radius);
-  border: 1px solid var(--color-border);
-  box-shadow: var(--shadow);
-}
-
-.fact-sheet-row:last-child {
-  margin-bottom: 0;
-}
-
-.fact-sheet dt {
-  margin: 0 0 10px;
+.top-video-heading {
+  margin: 0 0 6px;
   font-family: var(--font-heading);
-  font-size: 1.05rem;
+  font-size: 1.1rem;
   font-weight: 700;
-  color: var(--color-primary);
-  line-height: 1.4;
+  color: #e8f0e8;
+  text-align: center;
 }
 
-.fact-sheet dd {
-  margin: 0;
+.top-video-wrap {
+  max-width: 960px;
+  margin: 0 auto;
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35);
+  background: #000;
+}
+
+.top-video__media {
+  display: block;
+  width: 100%;
+  height: auto;
+  vertical-align: bottom;
+  min-height: 200px;
+  max-height: min(70vh, 640px);
+  object-fit: contain;
+  background: #111;
+}
+
+.top-video-error {
+  max-width: 720px;
+  margin: 8px auto 0;
+  padding: 14px 16px;
+  font-size: 0.88rem;
+  line-height: 1.65;
+  color: #3d2a20;
+  background: #fff3e0;
+  border: 1px solid #e8c9a0;
+  border-radius: var(--radius);
+  text-align: left;
+}
+
+/* ----- 本日の開園状況 ----- */
+.open-status {
+  padding: 40px 0 48px;
+  background: linear-gradient(180deg, #f0f6f0 0%, #fff 100%);
+  scroll-margin-top: calc(var(--header-height) + 12px);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.open-status .section-title--left {
+  margin-left: 0;
+}
+
+.open-status-lead {
+  margin: 0 0 16px;
   font-size: 0.95rem;
-  line-height: 1.8;
+  line-height: 1.75;
   color: var(--color-text);
 }
 
-.fact-sheet dd strong {
+.open-status-clock {
+  margin: 0 0 12px;
+  font-size: 0.9rem;
+  color: var(--color-text-muted);
+}
+
+.open-status-badge {
+  margin: 0 0 12px;
+  display: inline-block;
+  padding: 12px 20px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  border-radius: 8px;
+  line-height: 1.4;
+  background: var(--color-border);
   color: var(--color-text);
+}
+
+.open-status-badge.is-open {
+  background: #d4ede0;
+  color: #1a4d2e;
+}
+
+.open-status-badge.is-closed,
+.open-status-badge.is-out {
+  background: #ece8e4;
+  color: #4a3f38;
+}
+
+.open-status-badge.is-pending {
+  background: #e8f0e8;
+  color: var(--color-primary);
+}
+
+.open-status-detail {
+  margin: 0 0 12px;
+  font-size: 0.9rem;
+  line-height: 1.7;
+  color: var(--color-text);
+}
+
+.open-status-hint {
+  margin: 0 0 16px;
+  font-size: 0.8rem;
+  line-height: 1.6;
+  color: var(--color-text-muted);
+}
+
+.open-status-hint code {
+  font-size: 0.9em;
+}
+
+@media (min-width: 600px) {
+  .open-status-lead,
+  .open-status-hint,
+  .open-status-detail,
+  .open-status .topic-text {
+    max-width: 720px;
+  }
+}
+
+/* ----- 入園料表・設備・園内MAP ----- */
+.table-wrap {
+  margin: 16px 0 0;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.admission-table {
+  width: 100%;
+  min-width: 320px;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  background: var(--color-bg-card);
+  box-shadow: var(--shadow);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+.admission-table th,
+.admission-table td {
+  border: 1px solid var(--color-border);
+  padding: 10px 12px;
+  text-align: left;
+  vertical-align: top;
+}
+
+.admission-table thead th {
+  background: var(--color-primary);
+  color: #fff;
+  font-weight: 600;
+  font-size: 0.85rem;
+}
+
+.admission-table tbody th[scope="row"] {
+  font-weight: 600;
+  background: #f0f4f0;
+  white-space: nowrap;
+}
+
+.admission-table td {
+  color: var(--color-text);
+}
+
+.facilities-list {
+  margin: 12px 0 0;
+  padding-left: 1.2em;
+  line-height: 1.8;
+  font-size: 0.95rem;
+  color: var(--color-text);
+}
+
+.facilities-list li {
+  margin-bottom: 8px;
+}
+
+.site-map-figure {
+  margin: 16px 0 0;
+}
+
+.site-map-image {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  border: 1px solid var(--color-border);
+  background: var(--color-bg);
+}
+
+.site-map-caption {
+  margin: 8px 0 0;
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+  line-height: 1.5;
+}
+
+.safe-text--link {
+  margin-top: 16px;
+  margin-bottom: 0;
+  font-size: 0.95rem;
+}
+
+.safe-text--link a {
+  font-weight: 600;
 }
 
 .topic-subtitle {
@@ -305,6 +496,49 @@ a:hover {
   margin-top: 8px;
 }
 
+/* ブルーベリー狩り1枚カード内の下位ブロック（アンカー用） */
+.picking-block {
+  margin-top: 20px;
+  padding-top: 4px;
+  border-top: 1px solid var(--color-border);
+  scroll-margin-top: calc(var(--header-height) + 20px);
+}
+
+.picking-block:first-of-type {
+  margin-top: 16px;
+  padding-top: 0;
+  border-top: none;
+}
+
+.picking-block--product {
+  margin-top: 20px;
+}
+
+.topic-card--picking .topic-title {
+  margin-bottom: 4px;
+}
+
+/* 買いたい枠内：ギフト・贈答（1枚に集約） */
+.shop-gift-card {
+  border-top: 2px solid var(--color-primary-light);
+  background: linear-gradient(180deg, #f7f4ef 0%, var(--color-bg-card) 100%);
+}
+
+.shop-gift-card .topic-subtitle {
+  margin-top: 0;
+  scroll-margin-top: calc(var(--header-height) + 16px);
+}
+
+.gift-sub {
+  margin-top: 20px;
+  padding-top: 16px;
+  border-top: 1px dashed var(--color-border);
+}
+
+.gift-sub:first-of-type {
+  margin-top: 20px;
+}
+
 .topic-list {
   margin: 0 0 12px;
   padding-left: 1.25em;
@@ -319,17 +553,6 @@ a:hover {
 
 .topic-list li:last-child {
   margin-bottom: 0;
-}
-
-@media (min-width: 600px) {
-  .fact-sheet-row {
-    padding: 22px 24px 24px;
-    margin-bottom: 24px;
-  }
-
-  .fact-sheet dt {
-    font-size: 1.1rem;
-  }
 }
 
 /* ----- 目的別ゲート ----- */
@@ -360,6 +583,12 @@ a:hover {
 .audience-gate-grid {
   display: grid;
   gap: 16px;
+}
+
+.audience-gate-grid--two {
+  max-width: 640px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .audience-gate-card {
@@ -568,6 +797,11 @@ a:hover {
     gap: 20px;
   }
 
+  .audience-gate-grid--two {
+    grid-template-columns: repeat(2, 1fr);
+    max-width: 880px;
+  }
+
   .audience-gate-card {
     padding: 26px 22px;
     min-height: 168px;
@@ -580,6 +814,20 @@ a:hover {
   .topic-stack {
     gap: 24px;
   }
+}
+
+/* ----- お知らせ直下：商品カード3枚 ----- */
+.product-spotlight {
+  background: linear-gradient(180deg, #f0f4f0 0%, #faf9f5 100%);
+  scroll-margin-top: calc(var(--header-height) + 12px);
+}
+
+.product-spotlight-lead {
+  margin: -8px 0 20px;
+  text-align: center;
+  font-size: 0.95rem;
+  line-height: 1.7;
+  color: var(--color-text-muted);
 }
 
 /* ----- 商品一覧 ----- */
@@ -1257,6 +1505,13 @@ a:hover {
     max-width: none;
     margin-left: 0;
     margin-right: 0;
+  }
+
+  .product-list--spotlight {
+    grid-template-columns: repeat(3, 1fr);
+    max-width: 960px;
+    margin-left: auto;
+    margin-right: auto;
   }
 
   .product-image {
