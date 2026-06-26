@@ -3,25 +3,24 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="根岸FARM（青森県八戸市付近）。営業期間・時間・料金・予約・アクセス・駐車場・お子様連れまでページ内で整理。完全無農薬のブルーベリー狩り体験農園。">
-  <title>根岸FARM｜青森県のブルーベリー農園</title>
+  <meta name="description" content="根岸FARM（青森県八戸市南郷）。有機JAS認定のブルーベリー農園。開園期間7月上旬〜8月上旬、営業時間6:00〜16:00。ブルーベリー狩り体験・直売。予約・お問い合わせはお電話（080-6003-1840）にて。">
+  <title>根岸FARM｜青森県有数のJAS認定ブルーベリー農園</title>
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "LocalBusiness",
     "name": "根岸FARM",
-    "description": "青森県の完全無農薬ブルーベリー農園。ブルーベリー狩り体験。予約・営業期間・アクセスは各セクションをご確認ください。",
+    "description": "青森県八戸市南郷の有機JAS認定ブルーベリー農園。ブルーベリー狩り体験・直売。",
     "address": {
       "@type": "PostalAddress",
       "addressCountry": "JP",
       "addressRegion": "青森県",
-      "addressLocality": "八戸市",
-      "streetAddress": "（番地・建物名を追記してください）",
-      "postalCode": "031-xxxx"
+      "addressLocality": "八戸市南郷",
+      "streetAddress": "大字島守字三枚堂二枚堂13"
     },
-    "telephone": "+81-00-0000-0000",
+    "telephone": "+81-80-6003-1840",
     "priceRange": "¥¥",
-    "knowsAbout": ["ブルーベリー狩り", "ブルーベリー直売", "無農薬栽培", "観光農園"]
+    "knowsAbout": ["ブルーベリー狩り", "ブルーベリー直売", "有機JAS認定", "観光農園"]
   }
   </script>
   <link rel="stylesheet" href="styles.css">
@@ -41,8 +40,8 @@
     <nav class="nav" id="nav">
       <ul class="nav-list">
         <li><a href="#top-video">トップ</a></li>
-        <li><a href="#today-open">本日の開園</a></li>
-        <li><a href="#visit">来園したい</a></li>
+        <li><a href="#today-open">開園状況</a></li>
+        <li><a href="#access">アクセスマップ</a></li>
         <li><a href="#news">新着情報</a></li>
         <li><a href="#contact">連絡先</a></li>
         <li><a href="#gallery">ギャラリー</a></li>
@@ -55,7 +54,6 @@
       <div class="container">
         <h2 id="top-video-title" class="top-video-heading">農園の紹介動画</h2>
         <div class="top-video-wrap">
-          <!-- 動画: H.264 再エンコード版 movie/Dji 20250731061819 0003 D.mp4 -->
           <video
             class="top-video__media"
             id="topHeroVideo"
@@ -76,12 +74,12 @@
     <section id="today-open" class="section open-status" aria-labelledby="today-open-title" data-open-status>
       <div class="container">
         <h2 id="today-open-title" class="section-title section-title--left">本日の開園状況</h2>
-        <p class="open-status-lead">いま訪れて体験・直売の受付が可能か、ページを開いた日時の目安を表示します（下記の設定に沿って自動表示）。悪天候・在庫・混雑で変わる場合は必ず<a href="tel:000-0000-0000">お電話</a>でご確認ください。</p>
+        <p class="open-status-lead">現在訪れて受付が可能か表示します。来園可能な表示でも天候などによって入園できない場合がございますので、<a href="tel:080-6003-1840">お電話（080-6003-1840）</a>もしくは<a href="#news">Instagram</a>をご確認ください。</p>
         <p class="open-status-clock" id="openStatusNow" aria-live="polite">—</p>
         <p class="open-status-badge" id="openStatusBadge" role="status" aria-live="polite">読み込み中…</p>
         <p class="open-status-detail" id="openStatusDetail"></p>
-        <p class="open-status-hint" id="openStatusHint">※Googleカレンダーに「<strong>休園</strong>」「<strong>臨時休業</strong>」「<strong>開園</strong>」等のイベントを登録すると自動反映されます。シーズン・受付時間の設定は <code>script.js</code> 内の <code>NEGISHI_OPEN_CONFIG</code> で変更できます。</p>
-        <p class="topic-text"><a href="#visit-open">開園カレンダー・詳細</a> · <a href="#news">新着（公式X）</a></p>
+        <p class="open-status-hint" id="openStatusHint">※営業時間は6:00〜16:00となっております。（悪天候時は臨時休業とさせていただきます）</p>
+        <p class="topic-text"><a href="#visit-open">開園カレンダー・詳細</a> · <a href="#news">新着（Instagram）</a></p>
       </div>
     </section>
 
@@ -100,22 +98,22 @@
         <p class="product-spotlight-lead">カードをタップ（クリック）すると、ブルーベリー狩り体験の概要を別ウィンドウで表示します。</p>
         <ul class="product-list product-list--spotlight">
           <li class="product-card" id="spotlight-picking" data-product-modal>
-            <div class="product-image"><img src="image/blueberry-cimg01.jpg" alt="ブルーベリー狩りの様子"></div>
+            <div class="product-image"><img src="image/blueberry-close.jpg" alt="ブルーベリー狩りの様子"></div>
             <h3>ブルーベリー狩り</h3>
             <p>季節のブルーベリー狩り体験（要予約・時期により変動）。</p>
             <template class="product-detail">
-              <div class="product-modal-image"><img src="image/blueberry-cimg01.jpg" alt="ブルーベリー狩りの様子"></div>
+              <div class="product-modal-image"><img src="image/blueberry-close.jpg" alt="ブルーベリー狩りの様子"></div>
               <h3>ブルーベリー狩り</h3>
               <div class="product-modal-body">
-                <p>青森の自然の中で、摘みたてのブルーベリーを楽しめる体験です。お子様連れでも安心の完全無農薬農園です。</p>
+                <p>青森の自然の中で、摘みたてのブルーベリーを楽しめる体験です。お子様連れでも安心の<strong>有機JAS認定圃場</strong>です。</p>
                 <h4>体験のポイント</h4>
                 <ul>
-                  <li>完全無農薬のブルーベリーをその場で味わえます</li>
-                  <li>収穫時期：7月〜8月頃（年により変動）</li>
+                  <li>有機JAS認定の安心・安全なブルーベリーをその場で味わえます</li>
+                  <li>収穫時期：7月上旬〜8月上旬頃（年により変動）</li>
                   <li>要予約・時期により営業日が異なります</li>
                 </ul>
                 <h4>ご予約</h4>
-                <p>お電話またはメールにて事前予約をお願いします。収穫状況により受付を終了する場合があります。</p>
+                <p>お電話にて事前予約をお願いします。収穫状況により受付を終了する場合があります。</p>
                 <p><a href="#contact">連絡先はこちら</a></p>
                 <p><a href="#visit-picking">開園・料金・予約の詳細</a>はこちら</p>
               </div>
@@ -128,10 +126,11 @@
     <section class="section about-safe">
       <div class="container">
         <div class="safe-card">
-          <h2 class="safe-title">完全無農薬の自然農法ブルーベリー</h2>
-          <p class="safe-text">化学肥料や農薬などの化学合成物質を、一切使用しないで栽培しています。</p>
-          <p class="safe-text">ですので、お子様にも農薬に敏感な方にも安心して食べて頂ける数少ないブルーベリーです。</p>
-        <p class="safe-text safe-text--link"><a href="#visit-about-farm">有機ブルーベリーと園地のご紹介（根岸FARM作成の文章はこちら）</a></p>
+          <h2 class="safe-title">青森の大自然の中で、ブルーベリー摘み取り体験。<br>旬の実りを、その場で味わう贅沢を。</h2>
+          <p class="safe-text">青森県の山間に位置する当農園は、有機JAS認定を受けた圃場です。安全性にこだわって栽培していますので、小さなお子様から農薬に敏感な方まで、安心してご利用いただけます。</p>
+          <p class="safe-text">摘み取ったブルーベリーは、その場でそのままお召し上がりいただけます。山間の清らかな空気の中で、新鮮なブルーベリーをお楽しみください。</p>
+          <p class="safe-text">皆様のご来園を、心よりお待ちしております。</p>
+          <p class="safe-text safe-text--link"><a href="#visit-about-farm">農園と引き継ぐ想い・有機JASについて</a></p>
         </div>
       </div>
     </section>
@@ -150,16 +149,15 @@
     <!-- ========== 来園したい人向け ========== -->
     <section id="visit" class="section audience-section audience-visit">
       <div class="container">
-        <h2 class="section-title">来園したい方へ</h2>
-        <p class="audience-lead">ブルーベリー狩りや直売所でのお買い物、農園見学など、来園に必要な情報をまとめました。</p>
+        <h2 class="section-title">来園希望の方へ</h2>
+        <p class="audience-lead">ブルーベリー狩りや農園見学など、来園に必要な情報をまとめました。</p>
         <nav class="audience-nav" aria-label="来園情報の目次">
           <a href="#spotlight-products">体験カード（概要）</a>
           <a href="#today-open">本日の開園</a>
           <a href="#visit-picking">ブルーベリー狩り</a>
           <a href="#visit-open">今年の開園情報</a>
-          <a href="#visit-hours">営業時間</a>
+          <a href="#visit-hours">営業時間・予約</a>
           <a href="#visit-fee">料金</a>
-          <a href="#visit-reserve">予約方法</a>
           <a href="#visit-about-farm">有機・園地の説明</a>
           <a href="#visit-site-map">園内MAP</a>
           <a href="#visit-facilities">設備</a>
@@ -172,16 +170,21 @@
         <div class="topic-stack">
           <article id="visit-picking" class="topic-card topic-card--picking">
             <h3 class="topic-title">ブルーベリー狩り</h3>
-            <p class="topic-text">開園の目安・料金・予約・体験内容は、下記にまとめています（すべてブルーベリー狩り向けの情報です）。</p>
+            <p class="topic-text">開園の目安・料金・予約・体験内容は、下記にまとめています。</p>
 
             <div id="visit-open" class="picking-block">
               <h4 class="topic-subtitle">今年の開園情報</h4>
-              <p class="topic-text">最新の営業状況やお知らせは、下記カレンダーと公式X（ツイッター）でご確認ください。収穫状況により当日の受付が変わる場合があります。</p>
+              <p class="topic-text">最新の営業状況やお知らせは、下記カレンダーとInstagram、お電話にてご確認お願いします。収穫状況により当日の受付が変わる場合があります。</p>
               <p class="topic-text"><a href="#today-open">ページ上部の「本日の開園状況」</a>もあわせてご覧ください。</p>
               <h4 class="topic-subtitle">営業期間の目安</h4>
-              <p class="topic-text">ブルーベリー狩りを中心に、例年7月〜8月頃が中心シーズンです（年により変動）。直営の生果・加工品の販売期間は品目ごとに前後します。</p>
-              <h4 id="visit-hours" class="topic-subtitle">営業時間</h4>
-              <p class="topic-text">開園中の受付時間・最終入室は、シーズンごとにお知らせします。確定した時間帯（例：9:00〜17:00）が決まり次第、ここに明記してください。当日の短縮・臨時休園は<a href="#news">新着情報</a>をご確認ください。</p>
+              <p class="topic-text">当園のブルーベリーは、例年7月上旬〜8月上旬頃が中心シーズンです。気象状況によっては閉園時期が早まる可能性もございますのでご了承ください。</p>
+              <h4 id="visit-hours" class="topic-subtitle">営業時間・予約について</h4>
+              <ul class="topic-list">
+                <li>営業時間：<strong>6:00〜16:00</strong>（土日祝日を含む）※当日最終電話受付 15:30</li>
+                <li>ご予約の場合は直接お電話（<a href="tel:080-6003-1840">080-6003-1840</a>）お願いいたします。</li>
+              </ul>
+              <p class="topic-note">※雨天時は当日の状況を見て休園とさせていただく場合がございます。</p>
+              <p class="topic-note">※朝6:00〜8:00にご来園の方は前日18:00までにお電話お願いいたします。</p>
               <div class="calendar-wrap topic-embed">
                 <iframe
                   class="calendar-iframe"
@@ -194,51 +197,49 @@
                   title="根岸FARMの予定・開園カレンダー">
                 </iframe>
               </div>
-              <p class="topic-text"><a href="#news">新着情報・公式Xはこちら</a></p>
+              <p class="topic-text"><a href="#news">新着情報・Instagram はこちら</a></p>
             </div>
 
             <div id="visit-fee" class="picking-block">
               <h4 class="topic-subtitle">料金</h4>
-              <p class="topic-text">入園・体験にかかる料金の目安です。金額は<strong>未確定</strong>の場合、下表の「〇円」を確定後に書き換えてください。持ち帰り量の追加料金などがある場合は、同じ枠内に追記すると分かりやすいです。正確な金額はお電話・メール、または来園前に公式情報でご確認ください。</p>
               <div class="table-wrap">
                 <table class="admission-table">
                   <thead>
                     <tr>
                       <th scope="col">区分</th>
-                      <th scope="col">料金（税込・目安）</th>
+                      <th scope="col">料金（税込）</th>
                       <th scope="col">備考</th>
                     </tr>
                   </thead>
                   <tbody>
                     <tr>
                       <th scope="row">大人</th>
-                      <td>〇円</td>
-                      <td>未確定</td>
+                      <td>800円</td>
+                      <td>おひとり様</td>
                     </tr>
                     <tr>
                       <th scope="row">小学生以上</th>
-                      <td>〇円</td>
-                      <td>未確定（中学生・高校生の扱いは農園で整理してください）</td>
+                      <td>300円</td>
+                      <td>幼児（小学生未満）は家族同伴の方は無料</td>
                     </tr>
                     <tr>
-                      <th scope="row">幼児（未就学など）</th>
-                      <td>〇円</td>
-                      <td>未確定</td>
+                      <th scope="row">幼児（未就学）</th>
+                      <td>300円</td>
+                      <td>団体の方のみ</td>
                     </tr>
                     <tr>
                       <th scope="row">体験（滞在）時間</th>
-                      <td colspan="2">お一人・1組あたり<strong>60分</strong>（農園のルールに合わせて文言を調整してください）</td>
+                      <td colspan="2">お一人・1組あたり<strong>60分</strong>。園地内食べ放題 ※持ち帰り別料金 100g：230円</td>
                     </tr>
                   </tbody>
                 </table>
               </div>
-              <p class="topic-note">※最終的な料金・同伴者の定義は、開園案内・申込ページと同じ内容に揃えると迷子が減ります。</p>
             </div>
 
             <div id="visit-reserve" class="picking-block">
-              <h4 class="topic-subtitle">予約の有無・予約方法</h4>
-              <p class="topic-text"><strong>予約の有無：</strong>ブルーベリー狩りでは、混雑緩和・受入人数の都合により<strong>事前予約が必要</strong>となることがあります。直売のみのご利用で予約不要の場合もありますので、来園前に内容をご確認ください。</p>
-              <p class="topic-text"><strong>予約方法：</strong>お電話またはメールにて、希望日・人数・お連れ様の構成（お子様含む）をお知らせください。<a href="#contact">連絡先はこちら</a></p>
+              <h4 class="topic-subtitle">予約方法</h4>
+              <p class="topic-text"><strong>予約方法：</strong>お電話にて、希望日・人数・お連れ様の構成（お子様含む）をお知らせください。<a href="#contact">連絡先はこちら</a></p>
+              <p class="topic-note">※収穫状況により受付を終了する場合があります。</p>
             </div>
 
             <div class="picking-block">
@@ -248,41 +249,48 @@
           </article>
 
           <article id="visit-about-farm" class="topic-card">
-            <h3 class="topic-title">有機ブルーベリーと園地の説明</h3>
-            <p class="topic-text">ここに、<strong>有機JAS・土づくり・品種・園内の見どころ</strong>など、根岸FARMさま作成の紹介文を掲載してください。写真や図版を足す場合も、このブロック内に追加すると来園前のイメージが伝わりやすくなります。</p>
-            <h4 class="topic-subtitle">有機栽培について</h4>
-            <p class="topic-text">（根岸作成）有機ブルーベリーの取り組み、認証の趣旨、安心して味わえるポイントなどを記載する欄です。</p>
-            <h4 class="topic-subtitle">園地・畑のようす</h4>
-            <p class="topic-text">（根岸作成）区画の広さ、剪定・草生栽培の方針、家族で歩きやすい道など、園地の特徴を記載する欄です。</p>
+            <h3 class="topic-title">根岸FARM 観光農園と引き継ぐ想い</h3>
+            <h4 class="topic-subtitle">20年続く、想いをつなぐブルーベリー農園</h4>
+            <p class="topic-text">根岸FARMは、青森県八戸市南郷地区でブルーベリー、ネギ、大豆の栽培を行っています。ブルーベリー観光農園としては20年以上の歴史があり、毎年多くのお客様にご来園いただいております。</p>
+            <h4 class="topic-subtitle">母から受け継いだ、安心への想い</h4>
+            <p class="topic-text">当農園の礎を築いたのは、亡き母でした。「来ていただいた方々に、笑顔と安心・安全を届けたい」。その想いから有機JAS認定を取得し、地元に愛される農園づくりを続けてまいりました。</p>
+            <h4 class="topic-subtitle">変わらぬ味と、新たな体験を</h4>
+            <p class="topic-text">今後もその想いを大切に引き継ぎ、皆様に変わらぬ味と新たな体験をお届けできるよう、努力してまいります。根岸FARMで、心に残る時間をお過ごしください。</p>
           </article>
 
           <article id="visit-site-map" class="topic-card">
             <h3 class="topic-title">園内MAP</h3>
-            <p class="topic-text">園内の見取り図をここに掲載してください。</p>
+            <figure class="site-map-figure">
+              <img
+                class="site-map-image"
+                src="image/garden-map.png"
+                width="800"
+                height="540"
+                alt="根岸FARM 園内MAP"
+                loading="lazy"
+                decoding="async">
+              <figcaption class="site-map-caption">駐車場に車を止めた後、受付までお越しください。貴重品は休憩所に置いていかないようお願いします。お手洗いは仮設トイレか、展望台エリア内の施設トイレをご利用ください。</figcaption>
+            </figure>
           </article>
 
           <article id="visit-facilities" class="topic-card">
             <h3 class="topic-title">設備</h3>
-            <p class="topic-text">来園前に知っておきたい設備をチェック形式で掲げています。実態に合わせて加減・追記してください。</p>
             <ul class="facilities-list">
-              <li><strong>トイレ</strong>：あり（男女 / 要確認：おむつ替え台の有無は追記）</li>
-              <li><strong>手洗い・消毒</strong>：あり</li>
-              <li><strong>直売・レジ</strong>：あり</li>
-              <li><strong>休憩・日よけ</strong>：（あれば内容を追記、なければ「なし」等）</li>
-              <li><strong>授乳・多目的室</strong>：（該当があれば追記）</li>
-              <li><strong>ベビーカー</strong>：通路の状況に応じて注意書きを追記</li>
+              <li><strong>トイレ</strong>：仮設トイレ（園内）・展望台エリア内の施設トイレ</li>
+              <li><strong>休憩所</strong>：受付・休憩所あり（テーブル・ベンチ完備）</li>
+              <li><strong>駐車場</strong>：無料駐車場あり（<a href="#visit-parking">詳細</a>）</li>
+              <li><strong>貴重品管理</strong>：休憩所に置いていかないようお願いします</li>
             </ul>
-            <p class="topic-text">駐車の詳細は<a href="#visit-parking">駐車場</a>、園内の道のりは<a href="#visit-site-map">園内MAP</a>をご覧ください。</p>
           </article>
 
           <article id="access" class="topic-card">
             <h3 class="topic-title">アクセス</h3>
-            <p class="access-text topic-access-text">青森県八戸市付近。下記地図またはGoogleマップで「根岸FARM」で検索してください。</p>
+            <p class="access-text topic-access-text">青森県八戸市南郷付近。下記地図またはGoogleマップで「<strong>根岸観光農園</strong>」で検索してください。</p>
             <div class="map-wrap">
               <a href="https://www.google.co.jp/maps/@40.392525,141.4846402,17z?hl=ja" target="_blank" rel="noopener noreferrer" class="map-link">
                 <div class="map-placeholder">
                   <span class="map-label">Googleマップで開く</span>
-                  <span class="map-coords">〒031-xxxx 青森県八戸市付近</span>
+                  <span class="map-coords">青森県八戸市南郷</span>
                 </div>
               </a>
               <iframe
@@ -309,12 +317,23 @@
 
           <article id="visit-parking" class="topic-card">
             <h3 class="topic-title">駐車場</h3>
-            <p class="topic-text">お車でお越しの場合の駐車場の場所・台数・大型車の可否など、来園前にご確認ください（テキスト・写真をここに追加できます）。</p>
+            <p class="topic-text">園内に無料駐車場がございますのでご利用ください。駐車場に車を止めた後、受付までお越しください。</p>
+            <p class="topic-note">※団体でお越しの方は来園予約の際に車両の大きさと台数をお伝えください。</p>
           </article>
 
           <article id="visit-varieties" class="topic-card">
             <h3 class="topic-title">品種紹介</h3>
-            <p class="topic-text">農園で栽培している品種の特徴・収穫時期の目安などを掲載するエリアです。品種名と味わいの説明を追記すると、来園前のイメージが湧きやすくなります。</p>
+            <p class="topic-text">根岸FARMでは、時期ごとにさまざまな品種のブルーベリーをお楽しみいただけます。品種によって甘さ・酸味・粒の大きさ・香りが少しずつ違います。食べ比べながら、お気に入りの味を見つけてみてください。</p>
+            <figure class="site-map-figure">
+              <img
+                class="site-map-image"
+                src="image/variety-table.png"
+                width="1000"
+                height="700"
+                alt="根岸FARM ブルーベリー品種紹介"
+                loading="lazy"
+                decoding="async">
+            </figure>
           </article>
 
           <article id="visit-faq" class="topic-card">
@@ -322,18 +341,17 @@
             <dl class="faq-list">
               <div class="faq-item">
                 <dt>雨天でも開園しますか？</dt>
-                <dd>農園の方針により異なります。当日の判断は公式のお知らせまたはお問い合わせでご確認ください。</dd>
+                <dd>雨天時は当日の状況を見て休園とさせていただく場合がございます。当日の判断はInstagramまたは<a href="tel:080-6003-1840">お電話（080-6003-1840）</a>でご確認ください。</dd>
               </div>
               <div class="faq-item">
                 <dt>ペット同伴は可能ですか？</dt>
-                <dd>ルールは施設により異なります。事前にお電話またはメールでご確認ください。</dd>
+                <dd>条件付きで可能です。同伴する際はリード、マナーベルトの着用をお願いいたします。</dd>
               </div>
               <div class="faq-item">
                 <dt>履き物の注意はありますか？</dt>
-                <dd>田畑・不均一な路面がある場合があります。歩きやすい靴でのご来園をおすすめします。</dd>
+                <dd>不均一な路面や草が生えている場所では怪我をする場合があります。歩きやすい靴、靴下着用でのご来園をおすすめします。</dd>
               </div>
             </dl>
-            <p class="topic-note">※実際によくいただく質問に差し替えてください。</p>
           </article>
         </div>
       </div>
@@ -346,13 +364,13 @@
         <div class="contact-card">
           <dl class="contact-list">
             <dt>お問い合わせ</dt>
-            <dd class="contact-name">根岸 〇〇（ねぎし 〇〇）</dd>
+            <dd class="contact-name">根岸FARM（担当：根岸佑典）</dd>
             <dt>電話番号</dt>
-            <dd><a href="tel:000-0000-0000">000-0000-0000</a></dd>
+            <dd><a href="tel:080-6003-1840">080-6003-1840</a></dd>
             <dt>メール</dt>
-            <dd><a href="mailto:info@example.com">info@example.com</a></dd>
+            <dd><a href="mailto:nesscamond@gmail.com">nesscamond@gmail.com</a></dd>
           </dl>
-          <p class="contact-note">※営業時間・予約はお電話またはメールでお問い合わせください。</p>
+          <p class="contact-note">※営業時間・予約はお電話にてお問い合わせください。</p>
         </div>
       </div>
     </section>
@@ -360,14 +378,13 @@
     <section id="news" class="section news">
       <div class="container">
         <h2 class="section-title">新着情報</h2>
-        <p class="news-intro">公式ツイッター（X）で農園の様子や営業情報をお知らせしています。</p>
+        <p class="news-intro">Instagramで農園の様子や営業情報をお知らせしています。</p>
         <div class="twitter-wrap">
-          <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" class="twitter-link" id="twitterLink">
-            公式X（ツイッター）を見る
+          <a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer" class="twitter-link instagram-link" id="instagramLink">
+            公式Instagram を見る
           </a>
-          <div class="twitter-embed" id="twitterEmbed">
-            <p class="twitter-placeholder">X（Twitter）のタイムラインは、公式アカウントのURLを設定すると表示できます。</p>
-            <p class="twitter-hint">index.html の twitterEmbed 用に、X の埋め込みコードを貼り付けてください。</p>
+          <div class="twitter-embed" id="instagramEmbed">
+            <p class="twitter-placeholder">Instagramの埋め込みコードをここに貼り付けると、フィードが表示されます。</p>
           </div>
         </div>
       </div>
@@ -378,24 +395,32 @@
         <h2 class="section-title">ギャラリー</h2>
         <div class="gallery-grid" id="galleryGrid">
           <div class="gallery-item" data-index="0">
-            <div class="gallery-thumb" style="background: linear-gradient(135deg, #5a8f6a 0%, #3d6b4a 100%);"></div>
+            <div class="gallery-thumb"><img src="image/farm-field.jpg" alt="農園の風景"></div>
             <p class="gallery-caption">農園の風景</p>
           </div>
           <div class="gallery-item" data-index="1">
-            <div class="gallery-thumb" style="background: linear-gradient(135deg, #4a6b9e 0%, #2d4a6e 100%);"></div>
-            <p class="gallery-caption">ブルーベリー</p>
+            <div class="gallery-thumb"><img src="image/morning-mist.jpg" alt="朝もやの農園"></div>
+            <p class="gallery-caption">朝もやの農園</p>
           </div>
           <div class="gallery-item" data-index="2">
-            <div class="gallery-thumb" style="background: linear-gradient(135deg, #7a9e6a 0%, #5a7a4a 100%);"></div>
-            <p class="gallery-caption">収穫の様子</p>
+            <div class="gallery-thumb"><img src="image/observatory.jpg" alt="展望台からの景色"></div>
+            <p class="gallery-caption">展望台からの景色</p>
           </div>
           <div class="gallery-item" data-index="3">
-            <div class="gallery-thumb" style="background: linear-gradient(135deg, #8b7355 0%, #6b5a45 100%);"></div>
-            <p class="gallery-caption">直売所</p>
+            <div class="gallery-thumb"><img src="image/flower-bee.jpg" alt="ブルーベリーの花とミツバチ"></div>
+            <p class="gallery-caption">ブルーベリーの花</p>
           </div>
           <div class="gallery-item" data-index="4">
-            <div class="gallery-thumb" style="background: linear-gradient(135deg, #6a7a8e 0%, #4a5a6e 100%);"></div>
-            <p class="gallery-caption">季節の景色</p>
+            <div class="gallery-thumb"><img src="image/blueberry-close.jpg" alt="ブルーベリー"></div>
+            <p class="gallery-caption">ブルーベリー</p>
+          </div>
+          <div class="gallery-item" data-index="5">
+            <div class="gallery-thumb"><img src="image/harvest-box.jpg" alt="収穫のブルーベリー"></div>
+            <p class="gallery-caption">収穫のブルーベリー</p>
+          </div>
+          <div class="gallery-item" data-index="6">
+            <div class="gallery-thumb"><img src="image/rest-area.jpg" alt="休憩所"></div>
+            <p class="gallery-caption">休憩所</p>
           </div>
         </div>
       </div>
@@ -423,7 +448,7 @@
   <footer class="footer">
     <div class="container">
       <p class="footer-logo">根岸FARM</p>
-      <p class="footer-address">青森県</p>
+      <p class="footer-address">青森県八戸市南郷</p>
       <p class="footer-copy">&copy; 根岸FARM</p>
     </div>
   </footer>

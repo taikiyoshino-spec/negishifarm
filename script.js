@@ -173,9 +173,9 @@
   var NEGISHI_OPEN_CONFIG = {
     manual: null,
     seasonFrom: { month: 7, day: 1 },
-    seasonTo: { month: 8, day: 31 },
-    dayOpen: '09:00',
-    dayClose: '17:00',
+    seasonTo: { month: 8, day: 20 },
+    dayOpen: '06:00',
+    dayClose: '16:00',
     closedWeekdays: [],
     extraClosedDates: []
   };
