@@ -160,7 +160,15 @@
 
   // GitHub Pages で公開中の場合、'ユーザー名/リポジトリ名' を記入すると
   // 管理パネルからGitHubの編集ページへ直接リンクします（例: 'taiki/negishifarm'）
-  var NEGISHI_GITHUB_REPO = '';
+  var NEGISHI_GITHUB_REPO = 'taikiyoshino-spec/negishifarm';
+
+  // Googleカレンダー連携
+  // apiKey: Google Cloud Console で取得したAPIキー（空のままだと連携無効）
+  // calendarId: 埋め込みカレンダーと同じID
+  var NEGISHI_GCAL_CONFIG = {
+    apiKey: '',
+    calendarId: 'nesscamod@gmail.com'
+  };
 
   var NEGISHI_OPEN_CONFIG = {
     manual: null,
@@ -245,22 +253,60 @@
     return setBadge('ただいま開園中（受付時間内の目安）', 'is-open', cfg.dayOpen + ' 〜 ' + cfg.dayClose + ' の間で受付可能とみなしています。天候・在庫で変わる場合があります。');
   }
 
-  // status.json を取得してから表示を更新（file:// では fetch が使えないため自動フォールバック）
-  function loadStatusAndUpdate() {
-    if (typeof fetch === 'undefined') {
-      updateOpenStatus();
+  // Googleカレンダーから本日のイベントを取得してステータスを返す
+  // 「休園」「臨時休業」「定休」「お休み」→ 'closed'
+  // 「開園」→ 'open'
+  // 該当イベントなし → null（自動判断へ）
+  function loadStatusFromGCal(callback) {
+    if (!NEGISHI_GCAL_CONFIG.apiKey || typeof fetch === 'undefined') {
+      callback(null);
       return;
     }
-    fetch('status.json?_=' + Date.now())
+    var now = new Date();
+    var d = now.getFullYear() + '-' + openStatusPad(now.getMonth() + 1) + '-' + openStatusPad(now.getDate());
+    var url = 'https://www.googleapis.com/calendar/v3/calendars/' +
+      encodeURIComponent(NEGISHI_GCAL_CONFIG.calendarId) +
+      '/events?key=' + NEGISHI_GCAL_CONFIG.apiKey +
+      '&timeMin=' + encodeURIComponent(d + 'T00:00:00+09:00') +
+      '&timeMax=' + encodeURIComponent(d + 'T23:59:59+09:00') +
+      '&singleEvents=true';
+
+    fetch(url)
       .then(function (r) { return r.json(); })
       .then(function (data) {
-        NEGISHI_OPEN_CONFIG.manual = (data && (data.manual === 'open' || data.manual === 'closed'))
-          ? data.manual : null;
-        updateOpenStatus();
+        var items = (data && data.items) || [];
+        var status = null;
+        for (var i = 0; i < items.length; i++) {
+          var title = items[i].summary || '';
+          if (/休園|臨時休業|定休|お休み/.test(title)) { status = 'closed'; break; }
+          if (/開園/.test(title)) { status = 'open'; }
+        }
+        callback(status);
       })
-      .catch(function () {
+      .catch(function () { callback(null); });
+  }
+
+  // 優先順位: Googleカレンダー → status.json（手動）→ 時間設定（自動）
+  function loadStatusAndUpdate() {
+    loadStatusFromGCal(function (gcalStatus) {
+      if (gcalStatus !== null) {
+        NEGISHI_OPEN_CONFIG.manual = gcalStatus;
         updateOpenStatus();
-      });
+        return;
+      }
+      if (typeof fetch === 'undefined') {
+        updateOpenStatus();
+        return;
+      }
+      fetch('status.json?_=' + Date.now())
+        .then(function (r) { return r.json(); })
+        .then(function (data) {
+          NEGISHI_OPEN_CONFIG.manual = (data && (data.manual === 'open' || data.manual === 'closed'))
+            ? data.manual : null;
+          updateOpenStatus();
+        })
+        .catch(function () { updateOpenStatus(); });
+    });
   }
 
   loadStatusAndUpdate();
