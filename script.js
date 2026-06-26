@@ -106,7 +106,6 @@
       var captionEl = item.querySelector('.gallery-caption');
       var caption = captionEl ? captionEl.textContent : '';
 
-      // 背景スタイルをコピー（プレースホルダー用）、または img があれば表示
       var img = item.querySelector('.gallery-thumb img');
       if (img && img.src) {
         lightboxImage.innerHTML = '';
@@ -157,7 +156,12 @@
     });
   }
 
-  // ----- 本日の開園状況（NEGISHI_OPEN_CONFIG を農園の実情に合わせて編集） -----
+  // ----- 本日の開園状況 -----
+
+  // GitHub Pages で公開中の場合、'ユーザー名/リポジトリ名' を記入すると
+  // 管理パネルからGitHubの編集ページへ直接リンクします（例: 'taiki/negishifarm'）
+  var NEGISHI_GITHUB_REPO = '';
+
   var NEGISHI_OPEN_CONFIG = {
     manual: null,
     seasonFrom: { month: 7, day: 1 },
@@ -186,6 +190,7 @@
     var p = s.split(':');
     return parseInt(p[0], 10) * 60 + parseInt(p[1], 10);
   }
+
   function updateOpenStatus() {
     var nowEl = document.getElementById('openStatusNow');
     var badgeEl = document.getElementById('openStatusBadge');
@@ -239,8 +244,151 @@
     }
     return setBadge('ただいま開園中（受付時間内の目安）', 'is-open', cfg.dayOpen + ' 〜 ' + cfg.dayClose + ' の間で受付可能とみなしています。天候・在庫で変わる場合があります。');
   }
-  updateOpenStatus();
-  setInterval(updateOpenStatus, 60000);
+
+  // status.json を取得してから表示を更新（file:// では fetch が使えないため自動フォールバック）
+  function loadStatusAndUpdate() {
+    if (typeof fetch === 'undefined') {
+      updateOpenStatus();
+      return;
+    }
+    fetch('status.json?_=' + Date.now())
+      .then(function (r) { return r.json(); })
+      .then(function (data) {
+        NEGISHI_OPEN_CONFIG.manual = (data && (data.manual === 'open' || data.manual === 'closed'))
+          ? data.manual : null;
+        updateOpenStatus();
+      })
+      .catch(function () {
+        updateOpenStatus();
+      });
+  }
+
+  loadStatusAndUpdate();
+  setInterval(loadStatusAndUpdate, 60000);
+
+  // ----- 管理パネル（ロゴを5回タップ／クリックで表示） -----
+  (function () {
+    var panel = document.createElement('div');
+    panel.id = 'adminPanel';
+    panel.className = 'admin-panel';
+    panel.setAttribute('aria-hidden', 'true');
+    panel.setAttribute('role', 'dialog');
+    panel.setAttribute('aria-labelledby', 'adminPanelTitle');
+    panel.innerHTML =
+      '<div class="admin-panel-backdrop" id="adminPanelBackdrop"></div>' +
+      '<div class="admin-panel-inner">' +
+        '<button class="admin-panel-close" id="adminPanelClose" aria-label="閉じる">&times;</button>' +
+        '<h2 class="admin-panel-title" id="adminPanelTitle">開園状況の管理</h2>' +
+        '<p class="admin-panel-current">現在の設定：<strong id="adminCurrentLabel">—</strong></p>' +
+        '<p class="admin-panel-note">変更したいステータスを選んでください。</p>' +
+        '<div class="admin-status-group">' +
+          '<button class="admin-status-btn admin-status-btn--open" data-status="open">開園中（手動）</button>' +
+          '<button class="admin-status-btn admin-status-btn--closed" data-status="closed">休園（手動）</button>' +
+          '<button class="admin-status-btn admin-status-btn--auto" data-status="">自動（日時計算に戻す）</button>' +
+        '</div>' +
+        '<div class="admin-action" id="adminAction" hidden>' +
+          '<p class="admin-preview-label">status.json の内容：</p>' +
+          '<pre class="admin-json-preview" id="adminJsonPreview"></pre>' +
+          '<button class="admin-download-btn" id="adminDownloadBtn">status.json をダウンロード</button>' +
+          '<div class="admin-guide" id="adminGuide"></div>' +
+        '</div>' +
+      '</div>';
+    document.body.appendChild(panel);
+
+    var backdrop = document.getElementById('adminPanelBackdrop');
+    var closeBtn = document.getElementById('adminPanelClose');
+    var currentLabel = document.getElementById('adminCurrentLabel');
+    var statusBtns = panel.querySelectorAll('.admin-status-btn');
+    var actionSection = document.getElementById('adminAction');
+    var jsonPreview = document.getElementById('adminJsonPreview');
+    var downloadBtn = document.getElementById('adminDownloadBtn');
+    var guideDiv = document.getElementById('adminGuide');
+
+    function getStatusLabel(s) {
+      if (s === 'open') return '開園中（手動）';
+      if (s === 'closed') return '休園（手動）';
+      return '自動（日時計算）';
+    }
+
+    function openAdminPanel() {
+      currentLabel.textContent = getStatusLabel(NEGISHI_OPEN_CONFIG.manual || '');
+      statusBtns.forEach(function (b) { b.classList.remove('is-selected'); });
+      actionSection.hidden = true;
+      panel.setAttribute('aria-hidden', 'false');
+      panel.classList.add('is-open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeAdminPanel() {
+      panel.classList.remove('is-open');
+      panel.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+    }
+
+    function selectStatus(status) {
+      statusBtns.forEach(function (b) {
+        b.classList.toggle('is-selected', b.dataset.status === status);
+      });
+      jsonPreview.textContent = JSON.stringify({ manual: status || null }, null, 2);
+
+      var guide = '<p class="admin-guide-step">① 「status.json をダウンロード」でファイルを保存</p>';
+      if (NEGISHI_GITHUB_REPO) {
+        var editUrl = 'https://github.com/' + NEGISHI_GITHUB_REPO + '/edit/main/status.json';
+        guide += '<p class="admin-guide-step">② <a href="' + editUrl + '" target="_blank" rel="noopener">GitHub でファイルを直接編集</a>して上の内容に書き換えてコミット、</p>';
+        guide += '<p class="admin-guide-step">　 またはダウンロードしたファイルをGitHubにアップロードしてください。</p>';
+      } else {
+        guide += '<p class="admin-guide-step">② ダウンロードした <code>status.json</code> をサーバーの同じ場所に上書きアップロードすると反映されます。</p>';
+      }
+      guideDiv.innerHTML = guide;
+      actionSection.hidden = false;
+    }
+
+    statusBtns.forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        selectStatus(btn.dataset.status);
+      });
+    });
+
+    downloadBtn.addEventListener('click', function () {
+      var selectedBtn = panel.querySelector('.admin-status-btn.is-selected');
+      var status = selectedBtn ? selectedBtn.dataset.status : '';
+      var blob = new Blob([JSON.stringify({ manual: status || null }, null, 2) + '\n'], { type: 'application/json' });
+      var url = URL.createObjectURL(blob);
+      var a = document.createElement('a');
+      a.href = url;
+      a.download = 'status.json';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+    });
+
+    backdrop.addEventListener('click', closeAdminPanel);
+    closeBtn.addEventListener('click', closeAdminPanel);
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && panel.classList.contains('is-open')) {
+        closeAdminPanel();
+      }
+    });
+
+    // ロゴを5回タップ／クリックで管理パネルを表示
+    var logo = document.querySelector('.logo');
+    var clickCount = 0;
+    var clickTimer = null;
+    if (logo) {
+      logo.style.cursor = 'pointer';
+      logo.addEventListener('click', function () {
+        clickCount++;
+        clearTimeout(clickTimer);
+        if (clickCount >= 5) {
+          clickCount = 0;
+          openAdminPanel();
+        } else {
+          clickTimer = setTimeout(function () { clickCount = 0; }, 2500);
+        }
+      });
+    }
+  }());
 
   // ----- トップ動画: 再生エラー時（コーデック非対応・大容量障害・file:// 制限 など） -----
   var topHeroVideo = document.getElementById('topHeroVideo');
@@ -254,4 +402,4 @@
       showTopVideoError();
     }
   }
-})();
+}());
