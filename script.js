@@ -176,13 +176,8 @@
 
   // ----- 本日の開園状況 -----
 
-  // GitHub Pages で公開中の場合、'ユーザー名/リポジトリ名' を記入すると
-  // 管理パネルからGitHubの編集ページへ直接リンクします（例: 'taiki/negishifarm'）
   var NEGISHI_GITHUB_REPO = 'taikiyoshino-spec/negishifarm';
 
-  // Googleカレンダー連携
-  // apiKey: Google Cloud Console で取得したAPIキー（空のままだと連携無効）
-  // calendarId: 埋め込みカレンダーと同じID
   var NEGISHI_GCAL_CONFIG = {
     apiKey: '',
     calendarId: 'nesscamod@gmail.com'
@@ -256,7 +251,7 @@
       return setBadge('本日は臨時休業（設定の目安）', 'is-closed', '');
     }
     if (!openStatusInSeason(now, cfg)) {
-      return setBadge('ブルーベリー狩りシーズン外（目安）', 'is-out', 'シーズン期間は NEGISHI_OPEN_CONFIG の seasonFrom / seasonTo で変更。直売のみの日は新着等でお知らせください。');
+      return setBadge('ブルーベリー狩りシーズン外', 'is-out', '');
     }
 
     var mins = now.getHours() * 60 + now.getMinutes();
@@ -271,10 +266,6 @@
     return setBadge('ただいま開園中（受付時間内の目安）', 'is-open', cfg.dayOpen + ' 〜 ' + cfg.dayClose + ' の間で受付可能とみなしています。天候・在庫で変わる場合があります。');
   }
 
-  // Googleカレンダーから本日のイベントを取得してステータスを返す
-  // 「休園」「臨時休業」「定休」「お休み」→ 'closed'
-  // 「開園」→ 'open'
-  // 該当イベントなし → null（自動判断へ）
   function loadStatusFromGCal(callback) {
     if (!NEGISHI_GCAL_CONFIG.apiKey || typeof fetch === 'undefined') {
       callback(null);
