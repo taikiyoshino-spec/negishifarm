@@ -156,6 +156,23 @@
     });
   }
 
+  // ----- 品種紹介画像ライトボックス -----
+  var varietyImg = document.querySelector('.variety-zoomable');
+  if (varietyImg && lightbox && lightboxImage && lightboxCaption) {
+    varietyImg.style.cursor = 'zoom-in';
+    varietyImg.addEventListener('click', function () {
+      lightboxImage.innerHTML = '';
+      var fullImg = document.createElement('img');
+      fullImg.src = varietyImg.src;
+      fullImg.alt = varietyImg.alt;
+      lightboxImage.appendChild(fullImg);
+      lightboxCaption.textContent = varietyImg.alt;
+      lightbox.setAttribute('aria-hidden', 'false');
+      lightbox.classList.add('is-open');
+      document.body.style.overflow = 'hidden';
+    });
+  }
+
   // ----- 本日の開園状況 -----
 
   // GitHub Pages で公開中の場合、'ユーザー名/リポジトリ名' を記入すると

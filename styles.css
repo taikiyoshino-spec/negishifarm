@@ -455,6 +455,28 @@ a:hover {
   margin: 16px 0 0;
 }
 
+.variety-zoom-wrap {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+}
+
+.variety-zoom-hint {
+  display: block;
+  margin-top: 6px;
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+  text-align: center;
+}
+
+.variety-zoom-wrap .site-map-image {
+  transition: opacity 0.2s;
+}
+
+.variety-zoom-wrap .site-map-image:hover {
+  opacity: 0.85;
+}
+
 .site-map-image {
   width: 100%;
   height: auto;
