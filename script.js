@@ -156,20 +156,21 @@
     });
   }
 
-  // ----- 品種紹介画像ライトボックス -----
-  var varietyImg = document.querySelector('.variety-zoomable');
-  if (varietyImg && lightbox && lightboxImage && lightboxCaption) {
-    varietyImg.style.cursor = 'zoom-in';
-    varietyImg.addEventListener('click', function () {
-      lightboxImage.innerHTML = '';
-      var fullImg = document.createElement('img');
-      fullImg.src = varietyImg.src;
-      fullImg.alt = varietyImg.alt;
-      lightboxImage.appendChild(fullImg);
-      lightboxCaption.textContent = varietyImg.alt;
-      lightbox.setAttribute('aria-hidden', 'false');
-      lightbox.classList.add('is-open');
-      document.body.style.overflow = 'hidden';
+  // ----- 拡大可能画像ライトボックス -----
+  if (lightbox && lightboxImage && lightboxCaption) {
+    document.querySelectorAll('.variety-zoomable').forEach(function (img) {
+      img.style.cursor = 'zoom-in';
+      img.addEventListener('click', function () {
+        lightboxImage.innerHTML = '';
+        var fullImg = document.createElement('img');
+        fullImg.src = img.src;
+        fullImg.alt = img.alt;
+        lightboxImage.appendChild(fullImg);
+        lightboxCaption.textContent = img.alt;
+        lightbox.setAttribute('aria-hidden', 'false');
+        lightbox.classList.add('is-open');
+        document.body.style.overflow = 'hidden';
+      });
     });
   }
 
