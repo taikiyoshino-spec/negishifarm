@@ -216,7 +216,7 @@
       hour: '2-digit',
       minute: '2-digit'
     });
-    nowEl.textContent = '現在の目安（日本時間）：' + timeStr;
+    nowEl.textContent = timeStr;
 
     function setBadge(msg, className, detail) {
       badgeEl.textContent = msg;
