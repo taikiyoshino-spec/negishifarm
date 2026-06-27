@@ -1052,6 +1052,28 @@ a:hover {
   text-align: center;
 }
 
+.instagram-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+  color: #fff;
+  font-weight: 700;
+  font-size: 0.85rem;
+  padding: 3px 10px 3px 6px;
+  border-radius: 20px;
+  text-decoration: none;
+  vertical-align: middle;
+  transition: opacity 0.2s;
+}
+.instagram-badge:hover { opacity: 0.85; }
+
+.instagram-icon {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+}
+
 .twitter-wrap {
   background: var(--color-bg-card);
   border-radius: var(--radius);
