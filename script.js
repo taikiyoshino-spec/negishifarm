@@ -245,10 +245,10 @@
     }
 
     if (cfg.closedWeekdays.indexOf(now.getDay()) !== -1) {
-      return setBadge('本日は定休日（設定の目安）', 'is-closed', '定休日は NEGISHI_OPEN_CONFIG の closedWeekdays（0=日…6=土）で編集できます。');
+      return setBadge('本日は定休日', 'is-closed', '');
     }
     if (cfg.extraClosedDates.indexOf(openStatusDateKey(now)) !== -1) {
-      return setBadge('本日は臨時休業（設定の目安）', 'is-closed', '');
+      return setBadge('本日は臨時休業', 'is-closed', '');
     }
     if (!openStatusInSeason(now, cfg)) {
       return setBadge('ブルーベリー狩りシーズン外', 'is-out', '');
@@ -258,12 +258,12 @@
     var o = openStatusParseTime(cfg.dayOpen);
     var c = openStatusParseTime(cfg.dayClose);
     if (mins < o) {
-      return setBadge('本日は開園予定（受付開始前）', 'is-pending', '受付は ' + cfg.dayOpen + ' から（設定どおり）の目安です。');
+      return setBadge('本日は開園予定（受付開始前）', 'is-pending', '受付開始は ' + cfg.dayOpen + ' からです。');
     }
     if (mins >= c) {
-      return setBadge('本日の受付は終了した時間帯です（目安）', 'is-closed', '最終目安 ' + cfg.dayClose + '。実際の案内を優先してください。');
+      return setBadge('本日の受付は終了しました', 'is-closed', '');
     }
-    return setBadge('ただいま開園中（受付時間内の目安）', 'is-open', cfg.dayOpen + ' 〜 ' + cfg.dayClose + ' の間で受付可能とみなしています。天候・在庫で変わる場合があります。');
+    return setBadge('ただいま開園中', 'is-open', cfg.dayOpen + ' 〜 ' + cfg.dayClose);
   }
 
   function loadStatusFromGCal(callback) {
