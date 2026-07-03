@@ -179,7 +179,7 @@
   var NEGISHI_GITHUB_REPO = 'taikiyoshino-spec/negishifarm';
 
   var NEGISHI_GCAL_CONFIG = {
-    apiKey: '',
+    apiKey: 'AIzaSyA3GerkBCFAdaHUdUmjb2M6_g0XISdNbrY',
     calendarId: 'nesscamod@gmail.com'
   };
 
