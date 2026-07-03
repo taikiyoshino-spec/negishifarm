@@ -87,19 +87,31 @@ a:hover {
 .logo {
   margin: 0;
   line-height: 1;
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
 .logo-img {
-  height: 48px;
+  height: 56px;
   width: auto;
   display: block;
 }
 
+.logo-name {
+  font-family: var(--font-heading);
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--color-primary);
+  white-space: nowrap;
+}
+
 .tagline {
-  display: none;
+  display: block;
   margin: 0;
-  font-size: 0.75rem;
-  color: var(--color-text-muted);
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--color-primary);
 }
 
 .nav-toggle {
