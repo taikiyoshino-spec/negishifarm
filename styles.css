@@ -898,6 +898,26 @@ a:hover {
   color: var(--color-text);
 }
 
+.product-card-reserve-btn {
+  display: block;
+  width: calc(100% - 32px);
+  margin: 0 16px 8px;
+  padding: 8px 0;
+  background: var(--color-accent);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  font-family: inherit;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.product-card-reserve-btn:hover {
+  background: #2e5570;
+}
+
 .product-shipping {
   margin: 0;
   padding: 0 16px 8px;
@@ -1060,10 +1080,13 @@ a:hover {
   padding: 14px 20px;
   background: var(--color-primary);
   color: #fff;
+  border: none;
   border-radius: 10px;
   font-size: 1rem;
+  font-family: inherit;
   font-weight: 700;
   text-decoration: none;
+  cursor: pointer;
   transition: background 0.2s, transform 0.15s;
 }
 
@@ -1076,10 +1099,123 @@ a:hover {
   transform: scale(0.98);
 }
 
+.reserve-mail-btn:disabled {
+  background: #a9a9a9;
+  cursor: not-allowed;
+  transform: none;
+}
+
 .reserve-mail-btn svg {
   width: 20px;
   height: 20px;
   flex-shrink: 0;
+}
+
+/* ----- 予約フォーム ----- */
+.form-field {
+  margin-bottom: 16px;
+}
+
+.form-field label {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--color-text);
+}
+
+.form-required {
+  margin-left: 6px;
+  padding: 1px 6px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: #fff;
+  background: var(--color-accent);
+  border-radius: 4px;
+  vertical-align: middle;
+}
+
+.form-field input[type="text"],
+.form-field input[type="email"],
+.form-field input[type="tel"],
+.form-field input[type="date"],
+.form-field input[type="number"],
+.form-field select,
+.form-field textarea {
+  width: 100%;
+  padding: 10px 12px;
+  font-size: 1rem;
+  font-family: inherit;
+  color: var(--color-text);
+  background: #fff;
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  box-sizing: border-box;
+}
+
+.form-field select:disabled {
+  color: var(--color-text-muted);
+  background: #f2f1ee;
+}
+
+.form-field textarea {
+  resize: vertical;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+
+.form-row--counts {
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+
+.form-count label {
+  font-size: 0.8rem;
+}
+
+.form-availability {
+  margin: -8px 0 16px;
+  padding: 10px 12px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  border-radius: 8px;
+  color: #fff;
+}
+
+.form-availability.is-open {
+  background: #1a7a3a;
+}
+
+.form-availability.is-closed {
+  background: #c0392b;
+}
+
+.form-message {
+  margin: 0 0 12px;
+  padding: 10px 12px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  border-radius: 8px;
+}
+
+.form-message.is-success {
+  color: #fff;
+  background: #1a7a3a;
+}
+
+.form-message.is-error {
+  color: #fff;
+  background: #c0392b;
+}
+
+@media (min-width: 480px) {
+  .form-row {
+    grid-template-columns: 1fr 1fr;
+  }
 }
 
 /* ----- アクセス ----- */

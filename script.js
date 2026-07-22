@@ -95,6 +95,40 @@
     });
   }
 
+  // ----- 予約フォームモーダル -----
+  var reservationModal = document.getElementById('reservationModal');
+  var reservationModalClose = document.getElementById('reservationModalClose');
+  var openReservationModalBtns = document.querySelectorAll('[data-open-reservation-modal]');
+
+  if (reservationModal && reservationModalClose && openReservationModalBtns.length) {
+    function openReservationModal() {
+      reservationModal.setAttribute('aria-hidden', 'false');
+      reservationModal.classList.add('is-open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeReservationModal() {
+      reservationModal.classList.remove('is-open');
+      reservationModal.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+    }
+
+    openReservationModalBtns.forEach(function (btn) {
+      btn.addEventListener('click', function (e) {
+        e.stopPropagation();
+        openReservationModal();
+      });
+    });
+    reservationModalClose.addEventListener('click', closeReservationModal);
+    reservationModal.querySelector('.product-modal-backdrop').addEventListener('click', closeReservationModal);
+
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && reservationModal.classList.contains('is-open')) {
+        closeReservationModal();
+      }
+    });
+  }
+
   // ----- ギャラリーライトボックス -----
   if (galleryGrid && lightbox && lightboxClose && lightboxImage && lightboxCaption) {
     var items = galleryGrid.querySelectorAll('.gallery-item');
@@ -320,6 +354,178 @@
 
   loadStatusAndUpdate();
   setInterval(loadStatusAndUpdate, 60000);
+
+  // ----- 予約フォーム -----
+
+  var NEGISHI_RESERVATION_CONFIG = {
+    // デプロイ後、GASのウェブアプリURLをここに貼り付けてください（README参照）
+    webAppUrl: ''
+  };
+
+  function buildTimeSlots(dayOpen, dayClose) {
+    var slots = [];
+    var o = openStatusParseTime(dayOpen);
+    var c = openStatusParseTime(dayClose);
+    for (var mins = o; mins < c; mins += 60) {
+      var h = openStatusPad(Math.floor(mins / 60));
+      var m = openStatusPad(mins % 60);
+      slots.push(h + ':' + m);
+    }
+    return slots;
+  }
+
+  function checkDateAvailability(dateStr, callback) {
+    var parts = dateStr.split('-');
+    var d = new Date(parseInt(parts[0], 10), parseInt(parts[1], 10) - 1, parseInt(parts[2], 10));
+    var cfg = NEGISHI_OPEN_CONFIG;
+
+    if (!openStatusInSeason(d, cfg)) {
+      return callback({ status: 'closed', reason: 'ブルーベリー狩りシーズン外の日付です。' });
+    }
+    if (cfg.closedWeekdays.indexOf(d.getDay()) !== -1) {
+      return callback({ status: 'closed', reason: 'この日は定休日です。' });
+    }
+    if (cfg.extraClosedDates.indexOf(dateStr) !== -1) {
+      return callback({ status: 'closed', reason: 'この日は臨時休業です。' });
+    }
+    if (!NEGISHI_GCAL_CONFIG.apiKey || typeof fetch === 'undefined') {
+      return callback({ status: 'open', reason: '' });
+    }
+
+    var url = 'https://www.googleapis.com/calendar/v3/calendars/' +
+      encodeURIComponent(NEGISHI_GCAL_CONFIG.calendarId) +
+      '/events?key=' + NEGISHI_GCAL_CONFIG.apiKey +
+      '&timeMin=' + encodeURIComponent(dateStr + 'T00:00:00+09:00') +
+      '&timeMax=' + encodeURIComponent(dateStr + 'T23:59:59+09:00') +
+      '&singleEvents=true';
+
+    fetch(url)
+      .then(function (r) { return r.json(); })
+      .then(function (data) {
+        var items = (data && data.items) || [];
+        for (var i = 0; i < items.length; i++) {
+          var title = items[i].summary || '';
+          if (/休園|臨時休業|定休|お休み/.test(title)) {
+            return callback({ status: 'closed', reason: 'この日は休園予定です。' });
+          }
+        }
+        callback({ status: 'open', reason: '' });
+      })
+      .catch(function () { callback({ status: 'open', reason: '' }); });
+  }
+
+  var reservationForm = document.getElementById('reservationForm');
+  if (reservationForm) {
+    var resDate = document.getElementById('resDate');
+    var resTime = document.getElementById('resTime');
+    var resAvailability = document.getElementById('resAvailability');
+    var resSubmitBtn = document.getElementById('resSubmitBtn');
+    var resFormMessage = document.getElementById('resFormMessage');
+
+    (function setDateRange() {
+      var y = new Date().getFullYear();
+      var cfg = NEGISHI_OPEN_CONFIG;
+      var seasonFromStr = y + '-' + openStatusPad(cfg.seasonFrom.month) + '-' + openStatusPad(cfg.seasonFrom.day);
+      var todayStr = openStatusDateKey(new Date());
+      resDate.min = todayStr > seasonFromStr ? todayStr : seasonFromStr;
+      resDate.max = y + '-' + openStatusPad(cfg.seasonTo.month) + '-' + openStatusPad(cfg.seasonTo.day);
+    }());
+
+    function showAvailability(msg, className) {
+      if (!msg) {
+        resAvailability.hidden = true;
+        return;
+      }
+      resAvailability.textContent = msg;
+      resAvailability.className = 'form-availability ' + className;
+      resAvailability.hidden = false;
+    }
+
+    resDate.addEventListener('change', function () {
+      resTime.innerHTML = '';
+      if (!resDate.value) {
+        resTime.disabled = true;
+        showAvailability('', '');
+        return;
+      }
+      resTime.disabled = true;
+      var loadingOpt = document.createElement('option');
+      loadingOpt.textContent = '空き状況を確認しています…';
+      resTime.appendChild(loadingOpt);
+
+      checkDateAvailability(resDate.value, function (result) {
+        resTime.innerHTML = '';
+        if (result.status === 'closed') {
+          showAvailability(result.reason, 'is-closed');
+          var noneOpt = document.createElement('option');
+          noneOpt.value = '';
+          noneOpt.textContent = '選択できる時間帯がありません';
+          resTime.appendChild(noneOpt);
+          resTime.disabled = true;
+          if (resSubmitBtn) resSubmitBtn.disabled = true;
+          return;
+        }
+        showAvailability('', '');
+        var slots = buildTimeSlots(NEGISHI_OPEN_CONFIG.dayOpen, NEGISHI_OPEN_CONFIG.dayClose);
+        slots.forEach(function (slot) {
+          var opt = document.createElement('option');
+          opt.value = slot;
+          opt.textContent = slot + '〜';
+          resTime.appendChild(opt);
+        });
+        resTime.disabled = false;
+        if (resSubmitBtn) resSubmitBtn.disabled = false;
+      });
+    });
+
+    function showFormMessage(msg, className) {
+      if (!resFormMessage) return;
+      resFormMessage.textContent = msg;
+      resFormMessage.className = 'form-message ' + className;
+      resFormMessage.hidden = false;
+    }
+
+    reservationForm.addEventListener('submit', function (event) {
+      event.preventDefault();
+
+      var adults = parseInt(document.getElementById('resAdults').value, 10) || 0;
+      var elementary = parseInt(document.getElementById('resElementary').value, 10) || 0;
+      var infants = parseInt(document.getElementById('resInfants').value, 10) || 0;
+      if (adults + elementary + infants <= 0) {
+        showFormMessage('人数を1名以上でご入力ください。', 'is-error');
+        return;
+      }
+      if (!resTime.value) {
+        showFormMessage('来園希望時刻を選択してください。', 'is-error');
+        return;
+      }
+
+      if (!NEGISHI_RESERVATION_CONFIG.webAppUrl) {
+        showFormMessage('現在フォームからの送信は準備中です。お手数ですがお電話（080-6003-1840）にてご連絡ください。', 'is-error');
+        return;
+      }
+
+      if (resSubmitBtn) resSubmitBtn.disabled = true;
+      showFormMessage('送信しています…', '');
+
+      var formData = new FormData(reservationForm);
+      fetch(NEGISHI_RESERVATION_CONFIG.webAppUrl, {
+        method: 'POST',
+        mode: 'no-cors',
+        body: formData
+      }).then(function () {
+        showFormMessage('ご予約を受け付けました。ご入力のメールアドレスに確認メールをお送りしています。', 'is-success');
+        reservationForm.reset();
+        resTime.innerHTML = '<option value="">日付を選択してください</option>';
+        resTime.disabled = true;
+        showAvailability('', '');
+      }).catch(function () {
+        showFormMessage('送信に失敗しました。お手数ですがお電話（080-6003-1840）にてご連絡ください。', 'is-error');
+      }).then(function () {
+        if (resSubmitBtn) resSubmitBtn.disabled = false;
+      });
+    });
+  }
 
   // ----- トップ動画: 再生エラー時（コーデック非対応・大容量障害・file:// 制限 など） -----
   var topHeroVideo = document.getElementById('topHeroVideo');
