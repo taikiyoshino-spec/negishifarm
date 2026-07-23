@@ -3,12 +3,12 @@
  *
  * セットアップ手順は README.md を参照してください。
  * このファイルはリポジトリには参照用に置いてあるだけで、
- * サイトの動作には関与しません。nesscamond@gmail.com の
+ * サイトの動作には関与しません。nesscamod@gmail.com の
  * Google スプレッドシート付属の Apps Script エディタに
  * このファイルの内容をそのまま貼り付けてデプロイしてください。
  */
 
-var STAFF_EMAIL = 'nesscamond@gmail.com';
+var STAFF_EMAIL = 'nesscamod@gmail.com';
 var SHEET_NAME = '予約';
 var FARM_NAME = '根岸FARM';
 var FARM_PHONE = '080-6003-1840';
