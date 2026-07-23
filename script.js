@@ -359,7 +359,7 @@
 
   var NEGISHI_RESERVATION_CONFIG = {
     // デプロイ後、GASのウェブアプリURLをここに貼り付けてください（README参照）
-    webAppUrl: ''
+    webAppUrl: 'https://script.google.com/macros/s/AKfycbyNBKd18O55QiCRJPS6AZaXZ-CRP9KFDTeUw8lNCjLOB2ny7tK0gLhgtqwFv_4-P2X6Uw/exec'
   };
 
   function buildTimeSlots(dayOpen, dayClose) {
