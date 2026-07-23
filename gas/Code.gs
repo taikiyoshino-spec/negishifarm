@@ -66,6 +66,7 @@ function sendCustomerMail_(p) {
   var subject = '【' + FARM_NAME + '】ご予約を受け付けました';
   var body =
     (p.name || 'お客') + ' 様\n\n' +
+    '※このメールはシステムからの自動返信です。\n\n' +
     FARM_NAME + 'です。以下の内容でご予約を受け付けました。\n' +
     '収穫状況により内容をご確認・ご連絡させていただく場合がございます。\n\n' +
     reservationSummary_(p) + '\n\n' +
