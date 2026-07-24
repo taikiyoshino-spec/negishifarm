@@ -246,7 +246,7 @@
     return parseInt(p[0], 10) * 60 + parseInt(p[1], 10);
   }
 
-  function updateOpenStatus() {
+  function updateOpenStatus(noSchedule) {
     var nowEl = document.getElementById('openStatusNow');
     var badgeEl = document.getElementById('openStatusBadge');
     var detailEl = document.getElementById('openStatusDetail');
@@ -297,6 +297,9 @@
     if (mins >= c) {
       return setBadge('本日の受付は終了しました', 'is-closed', '');
     }
+    if (noSchedule) {
+      return setBadge('本日は休園', 'is-closed', '本日の開園予定がカレンダーに登録されていません。ご来園前にお電話でご確認ください。');
+    }
     return setBadge('ただいま開園中', 'is-open', cfg.dayOpen + ' 〜 ' + cfg.dayClose);
   }
 
@@ -329,26 +332,31 @@
       .catch(function () { callback(null); });
   }
 
-  // 優先順位: Googleカレンダー → status.json（手動）→ 時間設定（自動）
+  // 優先順位: Googleカレンダー → status.json（手動）→ 予定なしは休園扱い
   function loadStatusAndUpdate() {
     loadStatusFromGCal(function (gcalStatus) {
       if (gcalStatus !== null) {
         NEGISHI_OPEN_CONFIG.manual = gcalStatus;
-        updateOpenStatus();
+        updateOpenStatus(false);
         return;
       }
       if (typeof fetch === 'undefined') {
-        updateOpenStatus();
+        NEGISHI_OPEN_CONFIG.manual = null;
+        updateOpenStatus(true);
         return;
       }
       fetch('status.json?_=' + Date.now())
         .then(function (r) { return r.json(); })
         .then(function (data) {
-          NEGISHI_OPEN_CONFIG.manual = (data && (data.manual === 'open' || data.manual === 'closed'))
+          var manual = (data && (data.manual === 'open' || data.manual === 'closed'))
             ? data.manual : null;
-          updateOpenStatus();
+          NEGISHI_OPEN_CONFIG.manual = manual;
+          updateOpenStatus(manual === null);
         })
-        .catch(function () { updateOpenStatus(); });
+        .catch(function () {
+          NEGISHI_OPEN_CONFIG.manual = null;
+          updateOpenStatus(true);
+        });
     });
   }
 
@@ -388,8 +396,11 @@
     if (cfg.extraClosedDates.indexOf(dateStr) !== -1) {
       return callback({ status: 'closed', reason: 'この日は臨時休業です。' });
     }
+
+    var noScheduleReason = 'この日の開園予定がまだ登録されていません。お電話にてご確認ください。';
+
     if (!NEGISHI_GCAL_CONFIG.apiKey || typeof fetch === 'undefined') {
-      return callback({ status: 'open', reason: '' });
+      return callback({ status: 'closed', reason: noScheduleReason });
     }
 
     var url = 'https://www.googleapis.com/calendar/v3/calendars/' +
@@ -403,15 +414,20 @@
       .then(function (r) { return r.json(); })
       .then(function (data) {
         var items = (data && data.items) || [];
+        var hasOpenEvent = false;
         for (var i = 0; i < items.length; i++) {
           var title = items[i].summary || '';
           if (/休園|臨時休業|定休|お休み/.test(title)) {
             return callback({ status: 'closed', reason: 'この日は休園予定です。' });
           }
+          if (/開園/.test(title)) { hasOpenEvent = true; }
         }
-        callback({ status: 'open', reason: '' });
+        if (hasOpenEvent) {
+          return callback({ status: 'open', reason: '' });
+        }
+        callback({ status: 'closed', reason: noScheduleReason });
       })
-      .catch(function () { callback({ status: 'open', reason: '' }); });
+      .catch(function () { callback({ status: 'closed', reason: noScheduleReason }); });
   }
 
   var reservationForm = document.getElementById('reservationForm');
