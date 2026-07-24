@@ -504,6 +504,12 @@
     reservationForm.addEventListener('submit', function (event) {
       event.preventDefault();
 
+      var email = document.getElementById('resEmail').value.trim();
+      if (!email) {
+        showFormMessage('メールアドレスをご入力ください。メールアドレスがない場合はお電話にてご予約ください。', 'is-error');
+        return;
+      }
+
       var adults = parseInt(document.getElementById('resAdults').value, 10) || 0;
       var elementary = parseInt(document.getElementById('resElementary').value, 10) || 0;
       var infants = parseInt(document.getElementById('resInfants').value, 10) || 0;

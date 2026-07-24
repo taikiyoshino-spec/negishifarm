@@ -33,7 +33,7 @@ function appendReservationRow_(p) {
     sheet = ss.insertSheet(SHEET_NAME);
     sheet.appendRow([
       '受信日時', 'お名前', '来園希望日', '来園希望時刻',
-      '大人', '小学生以上', '幼児', '電話番号', 'メールアドレス', 'その他要望'
+      '大人', '小学生以上', '幼児', '電話番号', 'メールアドレス', 'ペット同伴', 'その他要望'
     ]);
   }
   sheet.appendRow([
@@ -46,6 +46,7 @@ function appendReservationRow_(p) {
     p.infants || '0',
     p.phone || '',
     p.email || '',
+    p.pet ? 'あり' : 'なし',
     p.notes || ''
   ]);
 }
@@ -58,6 +59,7 @@ function reservationSummary_(p) {
     '人数：大人 ' + (p.adults || '0') + '名 / 小学生以上 ' + (p.elementary || '0') + '名 / 幼児 ' + (p.infants || '0') + '名',
     '電話番号：' + (p.phone || ''),
     'メールアドレス：' + (p.email || ''),
+    'ペット同伴：' + (p.pet ? 'あり' : 'なし'),
     'その他ご要望：' + (p.notes || 'なし')
   ].join('\n');
 }

@@ -1135,6 +1135,33 @@ a:hover {
   vertical-align: middle;
 }
 
+.form-hint {
+  margin: 6px 0 0;
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+}
+
+.form-hint a {
+  color: var(--color-accent);
+}
+
+.form-field .form-checkbox-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 0;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--color-text);
+  cursor: pointer;
+}
+
+.form-checkbox-label input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+}
+
 .form-field input[type="text"],
 .form-field input[type="email"],
 .form-field input[type="tel"],
