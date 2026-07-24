@@ -246,7 +246,7 @@
     return parseInt(p[0], 10) * 60 + parseInt(p[1], 10);
   }
 
-  function updateOpenStatus(noSchedule) {
+  function updateOpenStatus() {
     var nowEl = document.getElementById('openStatusNow');
     var badgeEl = document.getElementById('openStatusBadge');
     var detailEl = document.getElementById('openStatusDetail');
@@ -287,6 +287,9 @@
     if (!openStatusInSeason(now, cfg)) {
       return setBadge('ブルーベリー狩りシーズン外', 'is-out', '');
     }
+    if (cfg.calendarStatus === 'closed') {
+      return setBadge('本日は休園予定です', 'is-closed', '');
+    }
 
     var mins = now.getHours() * 60 + now.getMinutes();
     var o = openStatusParseTime(cfg.dayOpen);
@@ -297,7 +300,7 @@
     if (mins >= c) {
       return setBadge('本日の受付は終了しました', 'is-closed', '');
     }
-    if (noSchedule) {
+    if (cfg.calendarStatus !== 'open') {
       return setBadge('本日は休園', 'is-closed', '本日の開園予定がカレンダーに登録されていません。ご来園前にお電話でご確認ください。');
     }
     return setBadge('ただいま開園中', 'is-open', cfg.dayOpen + ' 〜 ' + cfg.dayClose);
@@ -332,17 +335,16 @@
       .catch(function () { callback(null); });
   }
 
-  // 優先順位: Googleカレンダー → status.json（手動）→ 予定なしは休園扱い
+  // cfg.manual（status.json の人為的な強制表示）は営業時間を無視して即座に反映する。
+  // cfg.calendarStatus（Googleカレンダーの「開園」「休園」予定）は、あくまで
+  // 「今日は営業日か」の判定に使うだけで、実際の受付時間（dayOpen〜dayClose）は
+  // 別途チェックする。予定が1件も無い日は自動的に休園扱いとするフェイルセーフ。
   function loadStatusAndUpdate() {
     loadStatusFromGCal(function (gcalStatus) {
-      if (gcalStatus !== null) {
-        NEGISHI_OPEN_CONFIG.manual = gcalStatus;
-        updateOpenStatus(false);
-        return;
-      }
+      NEGISHI_OPEN_CONFIG.calendarStatus = gcalStatus;
       if (typeof fetch === 'undefined') {
         NEGISHI_OPEN_CONFIG.manual = null;
-        updateOpenStatus(true);
+        updateOpenStatus();
         return;
       }
       fetch('status.json?_=' + Date.now())
@@ -351,11 +353,11 @@
           var manual = (data && (data.manual === 'open' || data.manual === 'closed'))
             ? data.manual : null;
           NEGISHI_OPEN_CONFIG.manual = manual;
-          updateOpenStatus(manual === null);
+          updateOpenStatus();
         })
         .catch(function () {
           NEGISHI_OPEN_CONFIG.manual = null;
-          updateOpenStatus(true);
+          updateOpenStatus();
         });
     });
   }
