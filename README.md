@@ -3,6 +3,8 @@
 青森県のブルーベリー農園「根岸FARM」の公式サイトです。  
 HTML・CSS・JavaScript のみで構成され、スマホ優先のレスポンシブデザインです。
 
+開発時のブランチ運用ルールは [CONTRIBUTING.md](CONTRIBUTING.md) を参照してください。
+
 ## 構成
 
 - **index.html** … メインのHTML（商品一覧・連絡先・アクセス・新着情報・ギャラリー）
