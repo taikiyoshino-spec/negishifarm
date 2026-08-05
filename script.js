@@ -227,6 +227,12 @@
     extraClosedDates: []
   };
 
+  function setReservationButtonsEnabled(enabled) {
+    openReservationModalBtns.forEach(function (btn) {
+      btn.disabled = !enabled;
+    });
+  }
+
   function openStatusPad(n) {
     return n < 10 ? '0' + n : String(n);
   }
@@ -271,6 +277,8 @@
       if (detailEl) detailEl.textContent = detail || '';
     }
 
+    setReservationButtonsEnabled(true);
+
     if (cfg.manual === 'open') {
       return setBadge('ただいま開園中（手動表示）', 'is-open', '');
     }
@@ -284,7 +292,8 @@
     if (cfg.extraClosedDates.indexOf(openStatusDateKey(now)) !== -1) {
       return setBadge('本日は臨時休業', 'is-closed', '');
     }
-    if (!openStatusInSeason(now, cfg)) {
+    if (cfg.calendarStatus === 'offseason' || !openStatusInSeason(now, cfg)) {
+      setReservationButtonsEnabled(false);
       return setBadge('ブルーベリー狩りシーズン外', 'is-out', '');
     }
     if (cfg.calendarStatus === 'closed') {
@@ -324,12 +333,14 @@
       .then(function (r) { return r.json(); })
       .then(function (data) {
         var items = (data && data.items) || [];
-        var status = null;
+        var hasClosed = false, hasOpen = false, hasOffseason = false;
         for (var i = 0; i < items.length; i++) {
           var title = items[i].summary || '';
-          if (/休園|臨時休業|定休|お休み/.test(title)) { status = 'closed'; break; }
-          if (/開園/.test(title)) { status = 'open'; }
+          if (/休園|臨時休業|定休|お休み/.test(title)) { hasClosed = true; }
+          if (/オフシーズン/.test(title)) { hasOffseason = true; }
+          if (/開園/.test(title)) { hasOpen = true; }
         }
+        var status = hasClosed ? 'closed' : (hasOffseason ? 'offseason' : (hasOpen ? 'open' : null));
         callback(status);
       })
       .catch(function () { callback(null); });
@@ -416,15 +427,20 @@
       .then(function (r) { return r.json(); })
       .then(function (data) {
         var items = (data && data.items) || [];
-        var hasOpenEvent = false;
+        var hasClosed = false, hasOpen = false, hasOffseason = false;
         for (var i = 0; i < items.length; i++) {
           var title = items[i].summary || '';
-          if (/休園|臨時休業|定休|お休み/.test(title)) {
-            return callback({ status: 'closed', reason: 'この日は休園予定です。' });
-          }
-          if (/開園/.test(title)) { hasOpenEvent = true; }
+          if (/休園|臨時休業|定休|お休み/.test(title)) { hasClosed = true; }
+          if (/オフシーズン/.test(title)) { hasOffseason = true; }
+          if (/開園/.test(title)) { hasOpen = true; }
         }
-        if (hasOpenEvent) {
+        if (hasClosed) {
+          return callback({ status: 'closed', reason: 'この日は休園予定です。' });
+        }
+        if (hasOffseason) {
+          return callback({ status: 'closed', reason: 'ブルーベリー狩りシーズン外の日付です。' });
+        }
+        if (hasOpen) {
           return callback({ status: 'open', reason: '' });
         }
         callback({ status: 'closed', reason: noScheduleReason });

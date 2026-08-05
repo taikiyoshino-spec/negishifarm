@@ -918,6 +918,11 @@ a:hover {
   background: #2e5570;
 }
 
+.product-card-reserve-btn:disabled {
+  background: #a9a9a9;
+  cursor: not-allowed;
+}
+
 .product-shipping {
   margin: 0;
   padding: 0 16px 8px;
