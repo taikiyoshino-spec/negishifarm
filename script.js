@@ -227,9 +227,20 @@
     extraClosedDates: []
   };
 
-  function setReservationButtonsEnabled(enabled) {
+  function setReservationButtonsEnabled(enabled, reasonLabel) {
     openReservationModalBtns.forEach(function (btn) {
+      var labelEl = btn.querySelector('.reserve-btn-label') || btn;
+      if (!btn.dataset.defaultLabel) {
+        btn.dataset.defaultLabel = labelEl.textContent.trim();
+      }
       btn.disabled = !enabled;
+      if (!enabled && reasonLabel) {
+        labelEl.textContent = reasonLabel;
+        btn.title = reasonLabel;
+      } else {
+        labelEl.textContent = btn.dataset.defaultLabel;
+        btn.removeAttribute('title');
+      }
     });
   }
 
@@ -293,8 +304,8 @@
       return setBadge('本日は臨時休業', 'is-closed', '');
     }
     if (cfg.calendarStatus === 'offseason' || !openStatusInSeason(now, cfg)) {
-      setReservationButtonsEnabled(false);
-      return setBadge('ブルーベリー狩りシーズン外', 'is-out', '');
+      setReservationButtonsEnabled(false, 'オフシーズンのため予約受付停止中');
+      return setBadge('ブルーベリー狩りシーズン外', 'is-out', '現在は予約を受け付けておりません。');
     }
     if (cfg.calendarStatus === 'closed') {
       return setBadge('本日は休園予定です', 'is-closed', '');
